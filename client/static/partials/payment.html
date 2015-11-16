@@ -1,0 +1,44 @@
+<div class="container well" ng-controller='PaymentController'>
+	<form name="paymentForm" novalidate>   
+		<div class="row">
+			<div class="col-md-offset-8 col-md-2">
+				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
+			</div>
+			<div class="col-md-2"></div>
+		</div> 
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<h4><strong>Payment (Step 3 of 3)</strong></h4>
+				<p>Please verify your information below. Any missing or incorrect information may delay the process. </p>
+				<p>Click on <i class="fa fa-pencil fa-1x"> to make changes.</i> </p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+				<h5><strong>Prescription Information</strong><a class="btn" ng-click="rxInfoEdit()"><i class="fa fa-pencil fa-1x" style="margin-left: 10px"></i></a></h5>
+				<p style="margin: initial"><strong>Name:</strong> <span ng-bind="userData.firstName"></span><span> </span><span ng-bind="userData.lastName"></p>
+				<p style="margin: initial"><strong>DOB:</strong> <span ng-bind="userData.dob"></span></p>
+				<p style="margin: initial"><strong>Mobile:</strong> <span ng-bind="userData.phoneNumber"></span></p>
+				<p style="margin: initial"><strong>Transferring Pharmacy:</strong> <span ng-bind="userData.pharmacyName"></span></p>
+				<p style="margin: initial"><strong>Pharmacy Phone:</strong> <span ng-bind="userData.pharmacyPhone"></span></p>
+				<p style="margin: initial"><strong>Prescription Details:</strong> <span ng-bind="userData.prescriptionsInfo"></span></p>
+			</div>
+			<div class="top-buffer col-md-1"></div>
+			<div class="col-md-4">
+				<h5><strong>Delivery Address</strong><a class="btn" ng-click="addressEdit()"><i class="fa fa-pencil fa-1x" style="margin-left: 10px"></i></a></h5>
+				<p style="margin: initial"><span ng-bind="userData.deliveryInfo.street"></span></p>
+				<p style="margin: initial"><span ng-bind="userData.deliveryInfo.city"></span><span> </span><span ng-bind="userData.deliveryInfo.zipcode"></span></p>
+			</div>
+			
+		</div>
+		<div class="top-buffer text-center">
+			<input id="submit" class="btn btn-success" type="submit" value="Pay" ng-click="payment()">
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<p><em>By clicking pay, we will hold a $5 deposit from your credit card. Your card will not be charged until we process your prescription. Typical charges include prescription price (full price or insurance copayment) plus $5 dollar delivery fee.</em></p>
+			</div>
+		</div>
+	</form>
+</div>

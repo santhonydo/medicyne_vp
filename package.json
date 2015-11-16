@@ -1,0 +1,27 @@
+{
+  "name": "medicyne",
+  "version": "1.0.0",
+  "description": "Medicyne virtual pharmacy app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.7",
+    "angular-cookies": "^1.4.7",
+    "angular-stripe": "^4.2.8",
+    "angular-stripe-checkout": "^2.2.1",
+    "angular-ui-bootstrap": "^0.14.3",
+    "angulartics": "^0.20.1",
+    "angulartics-google-analytics": "^0.1.2",
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "mongoose": "^4.2.4",
+    "sendgrid": "^1.9.2",
+    "stripe": "^4.0.0"
+  }
+}

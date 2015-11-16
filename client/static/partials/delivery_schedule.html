@@ -1,0 +1,74 @@
+<div class="container well" ng-controller='DeliveryController'>
+	<form name="deliveryForm" novalidate>   
+		<div class="row">
+			<div class="col-md-offset-8 col-md-2">
+				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
+			</div>
+			<div class="col-md-2"></div>
+		</div> 
+		<div class="row">
+			<div class="col-md-offset-2 col-md-6">
+				<h4><strong>Delivery Information (Step 2 of 3)</strong></h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8" ng-click="reset()"><p class="pull-right btn" style="color:green"><em>Clear Form</em></p></div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+	    		<label><strong>Street Address</strong></label>
+	    		<input type="text" name="streetAddress" class="form-control" ng-model="deliverySchedule.street" required>
+	    		<div ng-messages="deliveryForm.streetAddress.$error" ng-if="deliveryForm.streetAddress.$touched">
+    				<div ng-messages-include="../static/partials/messages.html"></div>
+				</div>
+	  		</div>
+	  		
+	  		<div class="col-md-2">
+	  			<label><strong>City</strong></label>
+	  			<select class="form-control" ng-model="deliverySchedule.city">
+	  				<option>San Francisco, CA</option>
+	  			</select>
+	    	</div>
+	    	<div class="col-md-2">
+	  			<label><strong>Zip Code</strong></label>
+	  			<input type="text" name="zipcode" class="form-control" ng-model="deliverySchedule.zipcode" required ng-pattern="/^(\d{5}-\d{4}|\d{5})$/">
+	  			<div ng-messages="deliveryForm.zipcode.$error" ng-if="deliveryForm.zipcode.$touched">
+    				<div ng-message="required"><p style="color: red">This field is required</p></div>
+	    			<div ng-message="pattern"><p style="color: red">Zip code is invalid</p></div>
+				</div>
+	    	</div>
+
+	    </div>
+	    <div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-4">
+	    		<label><strong>Preferred Delivery Times</strong></label>
+	    	</div>
+	    </div>
+	    <div class="row">
+	    	<div class="col-md-offset-2 col-md-2 col-sm-10 col-xs-10">
+	    		<label class="radio-inline">
+	    			<input type="radio" name="deliveryTime" id="morning" ng-model="deliverySchedule.time" value="0800-1000">08:00AM - 10:00AM
+	    		</label>
+	    	</div>
+	    	<div class="col-md-2 col-sm-10 col-xs-10">
+	    		<label class="radio-inline">
+	    			<input type="radio" name="deliveryTime" id="afternoon" ng-model="deliverySchedule.time" value="1200-1400">12:00PM - 02:00PM
+	    		</label>
+	    	</div>
+	    	<div class="col-md-2 col-sm-10 col-xs-10">
+	    		<label class="radio-inline">
+	    			<input type="radio" name="deliveryTime" id="lateAfternoon" ng-model="deliverySchedule.time" value="1600-1800">04:00PM - 06:00PM
+	    		</label>
+	    	</div>
+	    	<div class="col-md-2 col-sm-10 col-xs-10">
+	    		<label class="radio-inline">
+	    			<input type="radio" name="deliveryTime" id="evening" ng-model="deliverySchedule.time" value="1900-2100">07:00PM - 09:00PM
+	    		</label>
+	    	</div>
+	    </div>
+		<div class="top-buffer col-md-offset-2 col-md-8">
+			<input id="submit" class="btn btn-success pull-left" type="submit" value="Back" ng-click="backBtn()">
+			<input id="submit" class="btn btn-success pull-right" type="submit" value="Next" ng-click="newDelivery()">
+		</div>
+	</form>
+</div>

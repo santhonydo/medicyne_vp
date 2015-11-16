@@ -1,0 +1,49 @@
+<form name="signupForm">
+	<div class="container well" ng-controller='SignupController'>   
+		<div class="row">
+			<div class="col-md-offset-8 col-md-2">
+				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
+			</div>
+			<div class="col-md-2"></div>
+		</div> 
+		<div class="row">
+			<div class="col-md-offset-2 col-md-6">
+				<h4><strong>Email signup</strong></h4>
+			</div>
+	    	
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+	    		<label><strong>Name</strong></label>
+	    		<input type="text" name="name" class="form-control" ng-model="signup.name" required ng-pattern="/^(\D)+$/">
+	    		<div ng-messages="signupForm.name.$error" ng-if="signupForm.name.$touched">
+    				<div ng-messages-include="../static/partials/messages.html"></div>
+				</div>
+	  		</div>
+	  		<div class="col-md-4">
+	  			<label><strong>Email</strong></label>
+	    		<input type="email" name="email" ng-model="signup.email" class="form-control" required>
+	    		<div ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
+    				<div ng-messages-include="../static/partials/messages.html"></div>
+				</div>
+	    	</div>
+	    </div>
+	   	<div class="top-buffer row">
+			<div class="col-md-offset-2 col-md-4">
+	    		<label><strong>City</strong></label>
+	    		<input type="text" name="city" class="form-control" ng-model="signup.city" ng-pattern="/^(\D)+$/">
+	  		</div>
+	  		<div class="col-md-2">
+	  			<label><strong>State</strong></label>
+	    		<input type="text" name="state" ng-model="signup.state" class="form-control">
+	    	</div>
+	    	<div class="col-md-2">
+	  			<label><strong>Zipcode</strong></label>
+	    		<input type="text" name="state" ng-model="signup.zipcode" class="form-control">
+	    	</div>
+	    </div>
+		<div class="top-buffer text-center">
+			<input class="btn btn-success" type="submit" value="Submit" ng-click="emailSignup()">		
+		</div>
+	</div>
+</form>

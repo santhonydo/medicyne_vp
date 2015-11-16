@@ -1,0 +1,83 @@
+<div class="container well" ng-controller='TransferRxController'>
+	<form name="fillRxForm" novalidate>   
+		<div class="row">
+			<div class="col-md-offset-8 col-md-2">
+				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
+			</div>
+			<div class="col-md-2"></div>
+		</div> 
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+				<h4><strong>Prescriptions Order (1 of 3)</strong></h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8" ng-click="reset()"><p class="pull-right btn" style="color:green"><em>Clear Form</em></p></div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-4">
+	    		<label><strong>First Name</strong></label>
+	    		<input type="text" name="firstName" class="form-control" ng-model="newRx.firstName" required ng-pattern="/^(\D)+$/">
+	    		<!-- validation error mesages -->
+	    		<div ng-messages="fillRxForm.firstName.$error" ng-if="fillRxForm.firstName.$touched">
+    				<div ng-messages-include="../static/partials/messages.html"></div>
+				</div>
+	  		</div>
+	  		
+	  		<div class="col-md-4">
+	  			<label><strong>Last Name</strong></label>
+	    		<input type="text" name="lastName" class="form-control" ng-model="newRx.lastName" required ng-pattern="/^(\D)+$/">
+	    		<div ng-messages="fillRxForm.lastName.$error" ng-if="fillRxForm.lastName.$touched">
+	    			<div ng-messages-include="../static/partials/messages.html"></div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-4">
+      			<label><strong>Date of Birth</strong></label>
+      			<input type="text" name="dob" class="form-control" placeholder="MM/DD/YYYY" ng-model="newRx.dob" required ng-pattern="/^((\d{4})-(\d{2})-(\d{2})|(\d{2})\/(\d{2})\/(\d{4}))$/">
+      			<div ng-messages="fillRxForm.dob.$error" ng-if="fillRxForm.dob.$touched">
+	    			<div ng-message="required"><p style="color: red">This field is required</p></div>
+	    			<div ng-message="pattern"><p style="color: red">Must be in MM/DD/YYYY format</p></div>
+	    		</div>
+    		</div>
+    		<div class="col-md-4">
+	  			<label><strong>Mobile # (Text message required)</strong></label>
+	    		<input type="text" name="phoneNumber" class="form-control" placeholder="415-555-5555" ng-model="newRx.phoneNumber" required ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">
+	    		<div ng-messages="fillRxForm.phoneNumber.$error" ng-if="fillRxForm.phoneNumber.$touched">
+	    			<div ng-message="required"><p style="color: red">This field is required</p></div>
+	    			<div ng-message="pattern"><p style="color: red">Must be a valid 10 digit phone number</p></div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-4">
+      			<label><strong>Pharmacy Name</strong></label>
+      			<input type="text" name="pharmacyName" class="form-control" ng-model="newRx.pharmacyName" required ng-pattern="/^(\D)+$/">
+    			<div ng-messages="fillRxForm.pharmacyName.$error" ng-if="fillRxForm.pharmacyName.$touched">
+	    			<div ng-messages-include="../static/partials/messages.html"></div>
+	    		</div>
+    		</div>
+    		<div class="col-md-4">
+	  			<label><strong>Pharmacy Phone #</strong></label>
+	    		<input type="text" name="pharmacyPhone" class="form-control" placeholder="415-555-5555" ng-model="newRx.pharmacyPhone"required ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/">
+	    		<div ng-messages="fillRxForm.pharmacyPhone.$error" ng-if="fillRxForm.pharmacyPhone.$touched">
+	    			<div ng-message="required"><p style="color: red">This field is required</p></div>
+	    			<div ng-message="pattern"><p style="color: red">Must be a valid 10 digit phone number</p></div>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-8">
+	    		<label><strong>Medication Name or Prescription Number</strong></label>
+	    		<textarea name="prescriptionsInfo" class="form-control" rows="3" placeholder="e.g. Lisinopril 10mg, Tylenol 500mg OR rx#183758, rx#124569 --- Enter 'Phone call' if you prefer to provide us this information over the phone and a pharmacist will contact you directly." ng-model="newRx.prescriptionsInfo" required></textarea>
+	    		<div ng-messages="fillRxForm.prescriptionsInfo.$error" ng-if="fillRxForm.prescriptionsInfo.$touched">
+	    			<div ng-messages-include="../static/partials/messages.html"></div>
+	    		</div>
+	    	</div>
+	    </div>
+		<div class="top-buffer col-md-offset-2 col-md-8">
+			<input id="submit" class="btn btn-success pull-right" type="submit" value="Next" ng-click="samePx()">		
+		</div>
+	</form>
+</div>
