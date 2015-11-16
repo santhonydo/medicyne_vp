@@ -189,6 +189,13 @@ medicyneAppModule.controller('TransferRxController', function($scope, $route, $l
 				medicyneAppFactory.transferRx($scope.newRx, function(data){
 					console.log("ObjectID: " + data._id);
 					var userID = data._id;
+					$cookies.put('firstName', data.firstName);
+					$cookies.put('lastName', data.lastName);
+					$cookies.put('dob', data.dob);
+					$cookies.put('phoneNumber', data.phoneNumber);
+					$cookies.put('pharmacyName', data.pharmacyName);
+					$cookies.put('pharmacyPhone', data.pharmacyPhone);
+					$cookies.put('prescriptionsInfo', data.prescriptionsInfo);
 					$location.path('/delivery_schedule/' + userID);
 				})
 			}
