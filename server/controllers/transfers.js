@@ -42,7 +42,8 @@ module.exports = (function(){
 				if(err){
 					console.log('Error retrieving transfer rx info');
 				}else{
-					console.log('Got patient: ' + results[0].firstName);
+					console.log('Got pharmacy choice: ' + results[0].transferRx);
+
 					res.json(results);
 				}
 			})
@@ -76,7 +77,7 @@ module.exports = (function(){
 							from: 'service@medicyne.com',
 							subject: 'New Order!',
 							text: 'We got a new order!',
-							html: '<p>First Name: ' + results.firstName + '</p> <p>Last Name: ' + results.lastName + '</p> <p>Email: ' + charge.receipt_email + '</p><p>DOB: ' + results.dob + '</p><p>Mobile: ' + results.phoneNumber + '</p><p>Pharmacy: ' + results.pharmacyName + '</p><p>Pharmacy Phone: ' + results.pharmacyPhone + '</p><p>Prescription Info: ' + results.prescriptionsInfo + '</p><p>Street: ' + results.deliveryInfo.street + '</p><p>City: ' + results.deliveryInfo.city + '</p><p>zipcode: ' + results.deliveryInfo.zipcode + '</p><p>Delivery Time: ' + results.deliveryInfo.time + '</p>'
+							html: '<p>Transfer to medicyne: ' + results.transferRx + '</p><p>First Name: ' + results.firstName + '</p> <p>Last Name: ' + results.lastName + '</p> <p>Email: ' + charge.receipt_email + '</p><p>DOB: ' + results.dob + '</p><p>Mobile: ' + results.phoneNumber + '</p><p>Pharmacy: ' + results.pharmacyName + '</p><p>Pharmacy Phone: ' + results.pharmacyPhone + '</p><p>Prescription Info: ' + results.prescriptionsInfo + '</p><p>Street: ' + results.deliveryInfo.street + '</p><p>City: ' + results.deliveryInfo.city + '</p><p>zipcode: ' + results.deliveryInfo.zipcode + '</p><p>Delivery Time: ' + results.deliveryInfo.time + '</p>'
 						}, function(err, json){
 							if (err) {return console.error(err);}
 							console.log(json);

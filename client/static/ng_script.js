@@ -12,14 +12,14 @@ medicyneAppModule.config(function($routeProvider, StripeCheckoutProvider){
 
 	$routeProvider
 		.when('/', {
-			templateUrl: '/static/partials/forms.html'
-		})
-		.when('/transfer', {
 			templateUrl: '/static/partials/tx_form.html'
 		})
-		.when('/current', {
-			templateUrl: '/static/partials/delivery_form.html'
-		})
+		// .when('/transfer', {
+		// 	templateUrl: '/static/partials/tx_form.html'
+		// })
+		// .when('/current', {
+		// 	templateUrl: '/static/partials/delivery_form.html'
+		// })
 		.when('/signup', {
 			templateUrl: '/static/partials/signup.html'
 		})
@@ -46,10 +46,10 @@ medicyneAppModule.config(function($routeProvider, StripeCheckoutProvider){
 medicyneAppModule.run(function($log, StripeCheckout, $cookies){
 	StripeCheckout.defaults({
 		opened: function(){
-			$log.debug("Stripe Checkout opened");
+			// $log.debug("Stripe Checkout opened");
 		},
 		closed: function(){
-			$log.debug("Stripe Checkout closed");
+			// $log.debug("Stripe Checkout closed");
 		}
 	})
 });
@@ -58,14 +58,14 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 	var factory = {};
 
 	factory.transferRx = function(info, callback){
-		console.log("factory data: " + info.firstName)
+		// console.log("factory data: " + info.pharmChoice)
 		$http.post('/transferRx', info).success(function(success){
 			callback(success);
 		})
 	};
 
 	factory.newDelivery = function(info, callback){
-		console.log("factory schedule data: " + info.id);
+		// console.log("factory schedule data: " + info.id);
 		$http.post('/newDelivery', info).success(function(success){
 			callback(success);
 		})
@@ -149,18 +149,21 @@ medicyneAppModule.controller('TransferRxController', function($scope, $route, $l
 
 	$scope.transferRx = function(){
 		if(angular.isUndefined($scope.newTransferRx)){
-			console.log('All fields empty');
+			// console.log('All fields empty');
+		}else if(angular.isUndefined($scope.newTransferRx.pharmChoice)){
+			// console.log('Missing pharmacy choice');
 		}else{
 			var keys = Object.keys($scope.newTransferRx).length;
-			if(keys < 7){
-				console.log("Not all fields are entered");
+			if(keys < 8){
+				// console.log("Not all fields are entered");
 			}else if(angular.isUndefined($scope.newTransferRx.phoneNumber) || angular.isUndefined($scope.newTransferRx.pharmacyPhone)){
-				console.log("Wrong phone number!");
+				// console.log("Wrong phone number!");
 			}else{
-				console.log($scope.newTransferRx);
-				console.log("Error phone: " + $scope.newTransferRx.phoneNumber);
+				if($scope.newTransferRx.pharmChoice === 'other'){
+					$scope.newTransferRx.transferRx = false;
+				}
 				medicyneAppFactory.transferRx($scope.newTransferRx, function(data){
-					console.log("ObjectID: " + data._id);
+					// console.log("ObjectID: " + data._id);
 					var userID = data._id;
 					$cookies.put('firstName', data.firstName);
 					$cookies.put('lastName', data.lastName);
@@ -179,15 +182,15 @@ medicyneAppModule.controller('TransferRxController', function($scope, $route, $l
 		$scope.newRx.transferRx = false;
 
 		if(typeof $scope.newRx == 'undefined'){
-			console.log('All fields empty');
+			// console.log('All fields empty');
 		}else{
 			var keys = Object.keys($scope.newRx).length;
 			if(keys < 7){
-				console.log("Not all fields are entered");
+				// console.log("Not all fields are entered");
 			}else{
-				console.log($scope.newRx);
+				// console.log($scope.newRx);
 				medicyneAppFactory.transferRx($scope.newRx, function(data){
-					console.log("ObjectID: " + data._id);
+					// console.log("ObjectID: " + data._id);
 					var userID = data._id;
 					$cookies.put('firstName', data.firstName);
 					$cookies.put('lastName', data.lastName);
@@ -219,18 +222,19 @@ medicyneAppModule.controller('DeliveryController', function($scope, $route, $loc
 	}
 
 	$scope.backBtn = function(){
-		$location.path('/transfer/');
+
+		$location.path('/');
 	}
 
 	$scope.newDelivery = function(){
 		var userDeliveryInfo = {id: $routeParams.id, deliveryInfo: $scope.deliverySchedule};
 
 		if(angular.isUndefined($scope.deliverySchedule)){
-			console.log('All fields empty');
+			// console.log('All fields empty');
 		}else if (!('street' in $scope.deliverySchedule) || !('city' in $scope.deliverySchedule) || !('zipcode' in $scope.deliverySchedule)) {
-			console.log("Empty fields")
+			// console.log("Empty fields")
 		}else if (angular.isUndefined($scope.deliverySchedule.street) || angular.isUndefined($scope.deliverySchedule.city) || angular.isUndefined($scope.deliverySchedule.zipcode)){
-			console.log("Empty touched fields");
+			// console.log("Empty touched fields");
 		}else{
 			medicyneAppFactory.newDelivery(userDeliveryInfo, function(data){
 				var userID = data.id;
@@ -253,12 +257,12 @@ medicyneAppModule.controller('PaymentController', function($scope, $location, $r
 	}
 	
 	$scope.rxInfoEdit = function(){
-		$location.path('/transfer');
+		$location.path('/');
 	}
 
 	medicyneAppFactory.getTransferRxInfo(userID, function(data){
 		$scope.userData = data[0];
-		console.log($scope.userData);
+		// console.log($scope.userData);
 	})
 
 	var handler = StripeCheckout.configure({
@@ -266,7 +270,7 @@ medicyneAppModule.controller('PaymentController', function($scope, $location, $r
     		locale: 'auto',
     		token: function(token) {
     			token.customerID = $routeParams.id;
-    			console.log('got token: ' + token.id + ' ' + token.customerID);
+    			// console.log('got token: ' + token.id + ' ' + token.customerID);
 		    	medicyneAppFactory.charge(token, function(data){
 		    		if(typeof data !== 'undefined'){
 		    			$cookies.remove('firstName');
@@ -311,12 +315,12 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 
 	$scope.emailSignup = function(){
 		if(angular.isUndefined($scope.signup)){
-			console.log('required fields empty');
+			// console.log('required fields empty');
 		}else if(angular.isUndefined($scope.signup.name) || angular.isUndefined($scope.signup.email)){
-			console.log('something undefined');
+			// console.log('something undefined');
 		}else{
 			medicyneAppFactory.signup($scope.signup, function(data){
-				console.log(data);
+				// console.log(data);
 				if(data){
 					$location.path('/signup_success');	
 				}

@@ -1,20 +1,54 @@
-<div class="container well" ng-controller='TransferRxController'>
+<div class="container" ng-controller='TransferRxController'>
 	<form name="transferRxForm" novalidate>   
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-offset-8 col-md-2">
 				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
 			</div>
 			<div class="col-md-2"></div>
-		</div> 
-		<div class="row">
-			<div class="col-md-offset-2 col-md-6">
-				<h4><strong>Prescriptions Transfer (Step 1 of 3)</strong></h4>
+		</div>  -->
+		<div class="top-buffer row">
+			<div class="text-center">
+				<!-- <h4><strong>Prescription Order (Step 1 of 3)</strong></h4> -->
+				 <i style="margin-right: 20px" class="color fa fa-file-text fa-2x"></i>
+				 <i style="margin-right: 20px; vertical-align: top; padding-top: 8px" class="fa fa-caret-right fa-1x"></i>
+				 <i style=" margin-right: 20px; opacity:0.5" class="fa fa-car fa-2x"></i>
+				 <i style=" margin-right: 20px; vertical-align: top; padding-top: 8px; opacity:0.5" class="fa fa-caret-right fa-1x"></i>
+				 <i style="opacity:0.5" class="fa fa-money fa-2x"></i>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-md-offset-2 col-md-8" ng-click="reset()"><p class="pull-right btn" style="color:green"><em>Clear Form</em></p></div>
 		</div>
-		<div class="row">
+
+		<!-- <div class="top-buffer row">
+			<div class="col-md-offset-2">
+				<label><strong>Where would you like to fill your prescription?</strong></label>
+			</div>
+			<div class="col-md-offset-3 col-md-2">
+				<select class="form-control">
+					<option>Medicyne</option>
+					<option>My current pharmacy</option>
+				</select>
+			</div>
+		</div> -->
+		<div class="top-buffer row">
+			<div class="col-md-offset-2 col-md-4">
+				<label><strong>Where would you like to fill your prescription?</strong> </label>	
+			</div>
+			<div class="col-md-2">
+	    		<select class="form-control" name="pharmChoice" ng-model="newTransferRx.pharmChoice"required>
+					<option value="medicyne">Medicyne</option>
+					<option value="other">My current pharmacy</option>
+				</select>
+				<div ng-messages="transferRxForm.pharmChoice.$error" ng-if="transferRxForm.pharmChoice.$touched">
+	    			<div ng-messages-include="../static/partials/messages.html"></div>
+	    	</div>
+	  		</div>
+	  		
+	  	</div>
+
+		<div class="top-buffer row">
 			<div class="col-md-offset-2 col-md-4">
 	    		<label><strong>First Name</strong></label>
 	    		<input type="text" name="firstName" class="form-control" ng-model="newTransferRx.firstName" required ng-pattern="/^(\D)+$/">
@@ -53,7 +87,7 @@
 	    <div class="top-buffer row">
 	    	<div class="col-md-offset-2 col-md-4">
       			<label><strong>Pharmacy Name</strong></label>
-      			<input type="text" name="pharmacyName" class="form-control" ng-model="newTransferRx.pharmacyName" required ng-pattern="/^(\D)+$/">
+      			<input type="text" name="pharmacyName" class="form-control" placeholder="Your current pharmacy." ng-model="newTransferRx.pharmacyName" required ng-pattern="/^(\D)+$/">
     			<div ng-messages="transferRxForm.pharmacyName.$error" ng-if="transferRxForm.pharmacyName.$touched">
 	    			<div ng-messages-include="../static/partials/messages.html"></div>
 	    		</div>
@@ -70,12 +104,13 @@
 	    <div class="top-buffer row">
 	    	<div class="col-md-offset-2 col-md-8">
 	    		<label><strong>Medication Name or Prescription Number</strong></label>
-	    		<textarea name="prescriptionsInfo" class="form-control" rows="3" placeholder="e.g. Lisinopril 10mg, Tylenol 500mg OR rx#183758, rx#124569 --- Enter 'Phone call' if you prefer to provide us this information over the phone and a pharmacist will contact you directly." ng-model="newTransferRx.prescriptionsInfo" required></textarea>
+	    		<textarea name="prescriptionsInfo" class="form-control" rows="3" placeholder="e.g. Lisinopril 10mg, Tylenol 500mg OR rx#183758 --- Enter 'CALL' if you prefer to provide us this information over the phone and a pharmacist will contact you directly." ng-model="newTransferRx.prescriptionsInfo" required></textarea>
 	    		<div ng-messages="transferRxForm.prescriptionsInfo.$error" ng-if="transferRxForm.prescriptionsInfo.$touched">
 	    			<div ng-messages-include="../static/partials/messages.html"></div>
 	    		</div>
 	    	</div>
 	    </div>
+	    
 		<div class="top-buffer col-md-offset-2 col-md-8">
 			<input id="submit" class="btn btn-success pull-right" type="submit" value="Next" ng-click="transferRx()">
 		</div>

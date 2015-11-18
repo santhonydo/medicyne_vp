@@ -1,26 +1,34 @@
-<div class="container well" ng-controller='PaymentController'>
+<div class="container" ng-controller='PaymentController'>
 	<form name="paymentForm" novalidate>   
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-offset-8 col-md-2">
 				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
 			</div>
 			<div class="col-md-2"></div>
-		</div> 
+		</div>  -->
+		<div class="top-buffer row">
+			<div class="text-center">
+				<!-- <h4><strong>Prescription Order (Step 1 of 3)</strong></h4> -->
+				 <i style="margin-right: 20px; opacity:0.5" class="fa fa-file-text fa-2x"></i>
+				 <i style="margin-right: 20px; vertical-align: top; padding-top: 8px; opacity:0.5" class="fa fa-caret-right fa-1x"></i>
+				 <i style=" margin-right: 20px; opacity:0.5" class="fa fa-car fa-2x"></i>
+				 <i style=" margin-right: 20px; vertical-align: top; padding-top: 8px; opacity:0.5" class="fa fa-caret-right fa-1x"></i>
+				 <i class="color fa fa-money fa-2x"></i>
+			</div>
+		</div>
 		<div class="row">
-			<div class="col-md-offset-2 col-md-8">
-				<h4><strong>Payment (Step 3 of 3)</strong></h4>
+			<div class="top-buffer col-md-offset-2 col-md-8">
 				<p>Please verify your information below. Any missing or incorrect information may delay the process. </p>
 				<p>Click on <i class="fa fa-pencil fa-1x"> to make changes.</i> </p>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col-md-offset-2 col-md-4">
 				<h5><strong>Prescription Information</strong><a class="btn" ng-click="rxInfoEdit()"><i class="fa fa-pencil fa-1x" style="margin-left: 10px"></i></a></h5>
 				<p style="margin: initial"><strong>Name:</strong> <span ng-bind="userData.firstName"></span><span> </span><span ng-bind="userData.lastName"></p>
 				<p style="margin: initial"><strong>DOB:</strong> <span ng-bind="userData.dob"></span></p>
 				<p style="margin: initial"><strong>Mobile:</strong> <span ng-bind="userData.phoneNumber"></span></p>
-				<p style="margin: initial"><strong>Transferring Pharmacy:</strong> <span ng-bind="userData.pharmacyName"></span></p>
+				<p style="margin: initial"><strong>Current Pharmacy:</strong> <span ng-bind="userData.pharmacyName"></span></p>
 				<p style="margin: initial"><strong>Pharmacy Phone:</strong> <span ng-bind="userData.pharmacyPhone"></span></p>
 				<p style="margin: initial"><strong>Prescription Details:</strong> <span ng-bind="userData.prescriptionsInfo"></span></p>
 			</div>

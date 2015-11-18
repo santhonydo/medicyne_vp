@@ -641,8 +641,8 @@ nav#footer p{
 	margin-top: 20px;
 }
 
-.top-buffer {
-	margin-bottom: 20px;
+.uppercase {
+	text-transform: uppercase;
 }
 @media
 only screen and (-webkit-min-device-pixel-ratio: 1.5),
