@@ -12,6 +12,9 @@ medicyneAppModule.config(function($routeProvider, StripeCheckoutProvider){
 
 	$routeProvider
 		.when('/', {
+			templateUrl: '/static/partials/homepage.html'
+		})
+		.when('/order', {
 			templateUrl: '/static/partials/tx_form.html'
 		})
 		// .when('/transfer', {
@@ -104,37 +107,31 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 	// }
 // })
 
+medicyneAppModule.controller('HomepageController', function($scope, $route, $location, $routeParams, medicyneAppFactory, $anchorScroll, $cookies){
+	$scope.scrollTo = function(id){
+		var old = $location.hash();
+		$location.hash(id);
+		$anchorScroll();
+		$location.hash(old);
+	}
+
+	$scope.goOrder = function() {
+		if (angular.isUndefined($scope.newOrder)){
+
+		} else {
+			$cookies.put('prescriptionsInfo', $scope.newOrder.prescriptionsInfo)
+			$location.path('/order/')
+		}
+	}
+
+
+})
+
 medicyneAppModule.controller('TransferRxController', function($scope, $route, $location, $routeParams, medicyneAppFactory, $cookies){
-
-	// $scope.openModal = function(indx){
-	// 	var modalInstance = $uibModal.open({
-	// 		animation: true,
-	// 		templateUrl: '/static/partials/quitConfirmation.html',
-	// 		controller: 'QuitController',
-	// 		size: 'sm'
-	// 	})
-	// }
-
-	if(typeof $cookies.get('firstName') != 'undefined'){
-		var allCookies = $cookies.getAll();
-		$scope.newTransferRx = allCookies;
-	};
-
-	// $scope.closeOut = function(){
-	// 	console.log('closing out');
-	// 	$cookies.remove('firstName');
-	// 	$cookies.remove('lastName');
-	// 	$cookies.remove('dob');
-	// 	$cookies.remove('phoneNumber');
-	// 	$cookies.remove('pharmacyName');
-	// 	$cookies.remove('pharmacyPhone');
-	// 	$cookies.remove('prescriptionsInfo');
-	// 	$cookies.remove('street');
-	// 	$cookies.remove('city');
-	// 	$cookies.remove('zipcode');
-	// 	$cookies.remove('time');
-	// 	$location.path('/');
-	// }
+	
+	var allCookies = $cookies.getAll();
+	$scope.newTransferRx = allCookies;
+	
 
 	$scope.reset = function(){
 		$cookies.remove('firstName');
@@ -208,10 +205,9 @@ medicyneAppModule.controller('TransferRxController', function($scope, $route, $l
 
 medicyneAppModule.controller('DeliveryController', function($scope, $route, $location, $routeParams, medicyneAppFactory, $cookies){
 	
-	if(typeof $cookies.get('time') != 'undefined'){
-		var allCookies = $cookies.getAll();
-		$scope.deliverySchedule = allCookies;
-	}
+	var allCookies = $cookies.getAll();
+	$scope.deliverySchedule = allCookies;
+	
 	
 	$scope.reset = function(){
 		$cookies.remove('street');
@@ -223,7 +219,7 @@ medicyneAppModule.controller('DeliveryController', function($scope, $route, $loc
 
 	$scope.backBtn = function(){
 
-		$location.path('/');
+		$location.path('/order/');
 	}
 
 	$scope.newDelivery = function(){
@@ -257,7 +253,7 @@ medicyneAppModule.controller('PaymentController', function($scope, $location, $r
 	}
 	
 	$scope.rxInfoEdit = function(){
-		$location.path('/');
+		$location.path('/order/');
 	}
 
 	medicyneAppFactory.getTransferRxInfo(userID, function(data){

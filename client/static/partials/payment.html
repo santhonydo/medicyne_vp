@@ -1,11 +1,12 @@
 <div class="container" ng-controller='PaymentController'>
-	<form name="paymentForm" novalidate>   
-		<!-- <div class="row">
+	<div class="container text-center">
+	    <div class="space"></div>
+		<div class="row">
 			<div class="col-md-offset-8 col-md-2">
 				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
 			</div>
 			<div class="col-md-2"></div>
-		</div>  -->
+		</div>
 		<div class="top-buffer row">
 			<div class="text-center">
 				<!-- <h4><strong>Prescription Order (Step 1 of 3)</strong></h4> -->
@@ -16,6 +17,12 @@
 				 <i class="color fa fa-money fa-2x"></i>
 			</div>
 		</div>
+	    <div class="section-title center">
+	        <h2><strong>Payment Deposit</strong></h2>
+	        <div class="clearfix"></div>
+	    </div>
+	</div>
+	<form name="paymentForm" novalidate>   
 		<div class="row">
 			<div class="top-buffer col-md-offset-2 col-md-8">
 				<p>Please verify your information below. Any missing or incorrect information may delay the process. </p>
@@ -38,7 +45,6 @@
 				<p style="margin: initial"><span ng-bind="userData.deliveryInfo.street"></span></p>
 				<p style="margin: initial"><span ng-bind="userData.deliveryInfo.city"></span><span> </span><span ng-bind="userData.deliveryInfo.zipcode"></span></p>
 			</div>
-			
 		</div>
 		<div class="top-buffer text-center">
 			<input id="submit" class="btn btn-success" type="submit" value="Pay" ng-click="payment()">

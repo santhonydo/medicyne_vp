@@ -1,0 +1,347 @@
+<span ng-controller='HomepageController'>
+<!-- Navigation
+    ==========================================-->
+    <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Medicyne</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a ng-click="scrollTo('home')" style="cursor: pointer;" class="page-scroll">Home</a></li>
+            <li><a ng-click="scrollTo('about')" style="cursor: pointer;" class="page-scroll">About Us</a></li>
+            <li><a ng-click="scrollTo('clients')" style="cursor: pointer;" class="page-scroll">Services</a></li>
+            <li><a ng-click="scrollTo('us')" style="cursor: pointer;" class="page-scroll">Our Team</a></li>
+            <li><a href="#/order" style="cursor: pointer;" class="page-scroll">Get Started</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- Home Page
+    ==========================================-->
+    <div id="home" class="text-center tf-home">
+        <div class="overlay">
+            <div class="content">
+                <h1>Medicyne <strong><span class="color">Virtual Pharmacy</span></strong></h1>
+                <p class="lead">All the care of a <strong>neighborhood pharmacy without</strong> any of <strong>the hassle</strong></p>
+                <div class="row" style="margin-top: 50px">
+                    <div class="col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 col-xs-offset-3 col-xs-6 col-lg-4">
+                        <input type="text" name="medication" class="form-control" placeholder="Enter your medication" style="opacity: 0.8; color: #18A69C; border-radius: 20px; text-align: center; font-size: 16px; height: 35px" ng-model="newOrder.prescriptionsInfo" >
+                        <h4 class="go-button" style="font-size: 30px;" ng-click="goOrder()"><strong>Go!</strong></h4>
+
+                    </div>
+                    <!-- <div class="col-md-offset-0 col-md-1 col-sm-offset-0 col-sm-1 col-xs-offset-0 col-xs-1 col-lg-offset-0 top-buffer" style="vertical-align: text-top"> -->
+                        <!-- <i class="fa fa-arrow-circle-o-right fa-3x go-button" style="vertical-align: top; margin-left: 0px" ng-click="goOrder()"></i> -->
+                        <!-- <button class="btn btn-default join-button"> -->
+                            <!-- <a style="color: white; cursor: pointer; font-size: 34px;" class="page-scroll" ng-click="goOrder()">Go!</a> -->
+
+                        <!-- </button> -->
+                    <!-- </div> -->
+                </div>
+                <div>
+                    <a ng-click="scrollTo('about')" style="cursor: pointer; margin-top: 80px" class="fa fa-angle-down page-scroll"></a> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Page
+    ==========================================-->
+<div id="about" class="tf-about">
+    <div class="container text-center">
+        <div class="section-title center">
+            <h2><strong>Now serving </strong>San Francisco Bay Area</h2>
+            <div class="line">
+                <hr>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-offset-1 col-md-10">
+                <p class="intro"><em>Our service is currently only available to San Francisco Bay Area residents with electronic prescriptions.</em></p>
+                <h3><a href="#/order">Get Started!</a></h3>
+                <p class="top-buffer">Not a San Francisco resident? <a href="#/signup">Signup here!</a> We will let you know when we are in town.</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="space"></div>
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-5">
+                <img src="./static/img/mobile_web.png" class="img-responsive">
+                <p class="text-center top-buffer"><a href="" data-toggle="modal" data-target="#myModal">See how it works!</a></p>
+            </div>
+            <div class="space"></div>
+            <div class="col-md-offset-1 col-md-6">
+                <div class="about-text">
+                    <div class="section-title">
+                        <!-- <h4>About us</h4> -->
+                        <h2>Bringing the Pharmacy to You</h2>
+                        <hr>
+                        <div class="clearfix"></div>
+                    </div>
+                    <p class="intro">Now you won't have to find time to go to the pharmacy or wait in line; we bring the medicine and services to you! By leveraging the latest web and mobile technology, our team of pharmacists is always available to provide the care you need, whether it's a quick delivery of cold medicine or comprehensive support for complex disease states.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How it works modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Your prescriptions in 3 easy steps.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 service">
+                            <div class="text-center">
+                                <i style="font-size: 3em" class="fa fa-pencil"></i>
+                            </div>
+                            <h4 class="text-center"><strong>1. Complete Rx Form</strong></h4>
+                        </div>
+                        <div class="col-md-4 service">
+                            
+                            <div class="text-center">
+                                <i style="font-size: 3em" class="fa fa-car"></i>
+                            </div>
+                            <h4 class="text-center"><strong>2. Schedule Delivery</strong></h4>
+                        </div>
+                        <div class="col-md-4 service">
+                            
+                            <div class="text-center">
+                                <i style="font-size: 3em" class="fa fa-money"></i>
+                            </div>
+                            <h4 class="text-center"><strong>3. Payment Deposit</strong></h4>
+                        </div> 
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clinical Care Section
+    ==========================================-->
+<div id="clients" class="text-center page-bg tf-team">
+    <div class="overlay">
+        <div class="container">
+            <div class="section-title center">
+                <h2>Follow-Through Care - <strong><em>The Medicyne Difference </em></strong><i id="delivery" style="font-size: 50%; outline: none !important" class="fa fa-info-circle more-info" tabindex="0" data-placement="top" data-container="body" data-toggle="popover" data-trigger="focus" data-title="Premium Service" data-content="Available only to monthly subscription plan."></i></h2>
+                <div class="line">
+                    <hr>
+                </div>
+            </div>
+            <div class="center text-center">
+                <div class="col-md-offset-2 col-md-8">
+                    <div class="about-text">
+                        <p class="intro">We assign you a personal pharmacist, who guides you to ensure medications are taken properly, effects are managed, and you reach your treatment and health goals. All done virtually, at your convenience.*</p>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+    <!-- Services Section
+    ==========================================-->
+    <div id="tf-services" class="text-center">
+        <div class="container">
+            <div class="section-title center">
+                <h2><strong>Live Chat </strong>with pharmacists</h2>
+                <div class="line">
+                    <hr>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-offset-1 col-md-10">
+                    <p class="intro"><em>Have questions about your medications or health? Get answers from licensed pharmacists immediately, whether it's late at night or you're out of town. We're never closed!</em></p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- <div class="space"></div> -->
+            <div class="top-buffer row">
+                <div class="col-md-4 col-sm-4">
+                    <i class="fa fa-comment"></i>
+                    <h4><strong>Text</strong></h4>
+                    <p>Have a sore throat? Quickly text your pharmacist for a recommendation.</p>
+                </div>
+                <div class="bottom-buffer"></div>
+                <div class="col-md-4 col-sm-4">
+                    <i class="fa fa-phone"></i>
+                    <h4><strong>Voice</strong></h4>
+                    <p>Need to share more about your symptoms? Speak directly with a pharmacist that knows your history.</p>
+                </div>
+                <div class="bottom-buffer"></div>
+                <div class="col-md-4 col-sm-4">
+                    <i class="fa fa-video-camera"></i>
+                    <h4><strong>Video*</strong></h4>
+                    <p>Don't understand your therapy? Schedule a virtual comphrensive health and medication review with your pharmacist. We would love to see you!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Delivery Page
+    ==========================================-->
+    <div class="tf-clients">
+        <div class="overlay" id="tf-services">
+            <div class="container ">
+                <div class="section-title center text-center">
+                    <h2>On demand Medication <strong>Delivery</strong></h2>
+                    
+                    <div class="line">
+                        <hr>
+                    </div>
+                </div>
+                <div class="center text-center">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="about-text">
+                            <p class="intro">Why wait in line? We send your prescription and non-prescription medications right to your door for $5.00 plus cost of goods. Available on demand, or set up auto-refills.</p>
+                        </div>
+                    </div>
+                </div>          
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Team page
+    ==========================================-->
+
+<div id="us" class="text-center">
+
+    <div class="container">
+            <div class="space"></div>
+        <div class="section-title center">
+            <h2>Meet the <strong>Team</strong></h2>
+            <div class="line">
+                <hr>
+            </div>
+            <div class="clearfix"></div>
+                <div class="col-md-offset-1 col-md-10">
+                    <p class="intro"><em>We are a team of pharmacists and innovators looking to move healthcare forward, one patient at a time.  With our years of experience in patient care, we are here to help you live a more productive and healthier life.</em></p>
+                </div>
+        </div>
+        <!-- <div class="space"></div> -->
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
+                <img src="./static/img/team/anthony.png" alt="..." class="img-circle team-img">
+                <div class="caption">
+                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Anthony Do, PharmD</p>
+                    <p class="uppercase" style="font-size: 18px;">Co-Founder | Pharmacist</p>
+                </div>
+                <div class="top-buffer">
+                    <a href="mailto:anthony@medicyne.com"><i class="fa fa-envelope-o fa-2x" style="margin-right: 20px; font-size: 20px"></i></a>
+                    <a href="https://www.linkedin.com/in/doanthony"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
+                </div>
+            </div>  
+            <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
+                <img src="./static/img/team/melody.png" alt="..." class="img-circle team-img">
+                <div class="caption">
+                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Melody Tran, PharmD</p>
+                    <p style="font-size: 18px" class="uppercase">Clinical Pharmacist</p>
+                </div>
+                <div class="top-buffer">
+                    <a href="mailto:melodytran@gmail.com"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
+                    <a href="https://www.linkedin.com/in/melody-tran-pharmd-11638058"><i class="fa fa-linkedin fa-2x" style="font-size: 20px"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3  top-buffer">
+                <img src="./static/img/team/tracy.png" alt="..." class="img-circle team-img">
+                <div class="caption">
+                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Tracy Pan</p>
+                    <p style="font-size: 18px" class="uppercase">Co-Founder | Marketing</p>
+                </div>
+                <div class="top-buffer">
+                    <a href="mailto:tracy@medicyne.com"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
+                    <a href="https://www.linkedin.com/in/tracydpan"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
+                <img src="./static/img/team/jesse.png" alt="..." class="img-circle team-img">
+                <div class="caption">
+                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Jesse Martinez, PharmD</p>
+                    <p style="font-size: 18px" class="uppercase">Team Advisor</p>
+                </div>
+                <div class="top-buffer">
+                    <a href="mailto:jmartinez@westernu.edu"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
+                    <a href="https://www.linkedin.com/in/jesse-martinez-pharmd-fascp-1b701212"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="space"></div>
+</div>    
+
+    <!-- Testimonials Section
+    ==========================================-->
+    <div id="tf-testimonials" class="text-center">
+        <div class="overlay">
+            <div class="container">
+                <div class="section-title center">
+                    <h2>Your health. <strong>You're in control.</strong></h2>
+                    <div class="line">
+                        <hr>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-offset-1 col-md-10">
+                    <p class="intro">Manage your medications and treatment plan anytime, anywhere via web or mobile.</p>
+                </div>
+                <div class="space"></div>
+                <div>
+                    <p class="intro">It's time to take your health care virtual. </p>
+                </div>
+                <div class="col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 col-xs-offset-3 col-xs-6">
+                    <form class="form-inline" role="form">
+                        <button style="margin-top: 10px" class="btn btn-default join-button"><a style="color: white" href="#/order" class="page-scroll">Get Started</a></button>
+                    </form>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+            <!-- Get started form Section
+    ==========================================-->
+
+ <!--    <div id="tf-start">
+        <div class="container text-center">
+            <div class="space"></div>
+            <div class="section-title center">
+                <h2><strong>Now serving </strong>San Francisco Bay Area</h2>
+                <div class="line">
+                    <hr>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-offset-1 col-md-10">
+                    <p class="intro"><em>Our service is currently only available to San Francisco Bay Area residents with electronic prescriptions. Simply fill out the form below to get started.</em></p>
+                    <p class="top-buffer">Not a San Francisco resident? <a href="#/signup">Signup here!</a> We will let you know when we are in town.</p>
+                </div>
+            </div>
+        </div>
+            <div ng-view=""></div>
+            <div class="space"></div>
+    </div> -->
+
+    <nav id="footer">
+        <div class="container">
+            <div class="pull-right fnav">
+                <p>MEDICYNE CORP © 2015. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </nav>
+</span>

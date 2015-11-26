@@ -1,11 +1,12 @@
 <div class="container" ng-controller='DeliveryController'>
-	<form name="deliveryForm" novalidate>   
-		<!-- <div class="row">
+	<div class="container text-center">
+	    <div class="space"></div>
+		<div class="row">
 			<div class="col-md-offset-8 col-md-2">
 				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
 			</div>
 			<div class="col-md-2"></div>
-		</div>  -->
+		</div> 
 		<div class="top-buffer row">
 			<div class="text-center">
 				<!-- <h4><strong>Prescription Order (Step 1 of 3)</strong></h4> -->
@@ -16,8 +17,19 @@
 				<i style="opacity:0.5" class="fa fa-money fa-2x"></i>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-offset-2 col-md-8" ng-click="reset()"><p class="pull-right btn" style="color:green"><em>Clear Form</em></p></div>
+	    <div class="section-title center">
+	        <h2><strong>Delivery Schedule</strong></h2>
+	        <div class="clearfix"></div>
+	            <div class="col-md-offset-1 col-md-10">
+	                <p class="intro"><em>We will try to process your prescription as fast as possible. Selecting a delivery time will help catch you wherever you are at.</em></p>
+	            </div>
+	    </div>
+	</div>
+	<form name="deliveryForm" novalidate>   
+		<div class="row top-buffer">
+			<div class="col-md-offset-2 col-md-8" ng-click="reset()">
+				<p class="pull-right btn" style="color:green"><em>Clear Form</em></p>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-4">
@@ -27,7 +39,6 @@
     				<div ng-messages-include="../static/partials/messages.html"></div>
 				</div>
 	  		</div>
-	  		
 	  		<div class="col-md-2">
 	  			<label><strong>City</strong></label>
 	  			<select class="form-control" ng-model="deliverySchedule.city">
@@ -42,7 +53,6 @@
 	    			<div ng-message="pattern"><p style="color: red">Zip code is invalid</p></div>
 				</div>
 	    	</div>
-
 	    </div>
 	    <div class="top-buffer row">
 	    	<div class="col-md-offset-2 col-md-4">
