@@ -17,12 +17,6 @@ medicyneAppModule.config(function($routeProvider, StripeCheckoutProvider){
 		.when('/order', {
 			templateUrl: '/static/partials/tx_form.html'
 		})
-		// .when('/transfer', {
-		// 	templateUrl: '/static/partials/tx_form.html'
-		// })
-		// .when('/current', {
-		// 	templateUrl: '/static/partials/delivery_form.html'
-		// })
 		.when('/signup', {
 			templateUrl: '/static/partials/signup.html'
 		})
