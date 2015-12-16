@@ -109,7 +109,7 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 			callback(success);
 		})
 	};
-
+	
 	factory.getTransferRxInfo = function(info, callback){
 		$http.post('/getTransferRxInfo', info).success(function(success){
 			callback(success);
