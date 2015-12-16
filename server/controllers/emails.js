@@ -18,7 +18,7 @@ module.exports = (function(){
 						console.log('added email to database');
 						console.log('ObjectID: ' + data._id);
 						sendgrid.send({
-							to : [data.email, 'anthony@medicyne.com'],
+							to : [data.email, 'anthony@medicyne.com', 'tracy@meidcyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'Welcome to Medicyne Premium!',
 							text: 'Congratulations on choosing a better health care!',
@@ -39,7 +39,7 @@ module.exports = (function(){
 						console.log('added email to database');
 						console.log('ObjectID: ' + data._id);
 						sendgrid.send({
-							to : [data.email, 'anthony@medicyne.com'],
+							to : [data.email, 'anthony@medicyne.com', 'tracy@medicyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'Welcome to Medicyne!',
 							text: 'Congratulations on choosing a better health care! Unfortunately, Medicyne is not servicing medication deliveries in your neighborhood just yet.  We’ll notify you as soon as we launch in your area.',
