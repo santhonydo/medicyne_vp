@@ -44,19 +44,25 @@ module.exports = (function(){
 				}else{
 					console.log('Successfully updated.')
 					sendgrid.send({
-							to : ['anthony@medicyne.com'],
+							to : 'anthony@medicyne.com',
 							from: 'service@medicyne.com',
 							subject: 'New Order!',
 							text: 'We got a new order!',
 							html: '<h1>Patient Information</h1><p>First Name: ' + result.firstName + '</p><p>Last Name: ' + result.lastName + '</p><p>Email: ' + result.email + '</p><p>DOB: ' + result.dob + '</p><p>Mobile: ' + result.phoneNumber + '</p><h1>Prescripiton Information</h1><p>Pharmacy: ' + result.pharmacyName + '</p><p>Pharmacy Phone: ' + result.pharmacyPhone + '</p><p>Prescription Info: ' + result.prescriptionsInfo + '</p><h1>Insurance Information</h1><p>Carrier Name: '+result.insuranceInfo.carrierName + '</p><p>Member ID Number: '+result.insuranceInfo.memberNumber + '</p><p>RxGroup: '+result.insuranceInfo.rxGroup + '</p><p>RxBin: '+result.insuranceInfo.rxBin + '</p><p>PCN: '+result.insuranceInfo.rxGroup + '</p><p>Get patient insurance from existing pharmacy: '+result.insuranceInfo.collect + '</p><p>Cash paying patient: '+result.insuranceInfo.cash + '</p><h1>Delivery Information</h1><p>Street: ' + result.deliveryInfo.street + '</p><p>City: ' + result.deliveryInfo.city + ' ' + result.deliveryInfo.zipcode + '</p><p>Delivery Time: ' + result.deliveryInfo.time + '</p>'
-						});	
-					sendgrid.send({
-						to : [result.email],
-							from: 'service@medicyne.com',
-							subject: 'New Order!',
-							text: 'We got a new order!',
-							html: '<h1>Thank You For Using Medicyne!</h1><p>Hi ' + result.firstName + ',</p><p>This email is to confirm that we have received your prescription order.  Our pharmacist will contact you within 1 hour to confirm your prescription price and delivery time.</p><p>Feel free to contact us at service@medicyne.com for any questions regarding your prescripitons.</p><p>Thank you,</p><p>The Medicyne Team</p>'
+						}, function(err, json) {
+							if(err) {
+								return console.error(err);
+							} else {
+								sendgrid.send({
+									to : [result.email],
+										from: 'service@medicyne.com',
+										subject: 'New Order!',
+										text: 'We got a new order!',
+										html: '<h1>Thank You For Using Medicyne!</h1><p>Hi ' + result.firstName + ',</p><p>This email is to confirm that we have received your prescription order.  Our pharmacist will contact you within 1 hour to confirm your prescription price and delivery time.</p><p>Feel free to contact us at service@medicyne.com for any questions regarding your prescripitons.</p><p>Thank you,</p><p>The Medicyne Team</p>'
+									})
+							}
 					});
+
 					res.json(result);
 				}
 			})

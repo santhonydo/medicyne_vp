@@ -15,7 +15,8 @@ module.exports = (function(){
 					console.log('error adding email');
 				}else{
 					sendgrid.send({
-						to : [data.email, 'anthony@medicyne.com'],
+						to : data.email,
+						bcc: ['anthony@medicyne.com', 'tracy@medicyne.com'],
 						from: 'service@medicyne.com',
 						subject: 'Welcome to Medicyne!',
 						text: 'Congratulations on choosing a better health care! Unfortunately, Medicyne is not servicing medication deliveries in your neighborhood just yet.  We’ll notify you as soon as we launch in your area.',
@@ -31,13 +32,14 @@ module.exports = (function(){
 
 		premiumAlert: function(req, res){
 			var email = new Email(req.body);
-			
+
 			email.save(function(err, data){
 				if(err){
 					console.log('error adding email');
 				}else{
 					sendgrid.send({
-						to : [data.email, 'anthony@medicyne.com'],
+						to : data.email,
+						bcc: ['anthony@medicyne.com', 'tracy@medicyne.com'],
 						from: 'service@medicyne.com',
 						subject: 'Welcome to Medicyne Premium!',
 						text: 'Congratulations on choosing a better health care!',
