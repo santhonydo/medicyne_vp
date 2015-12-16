@@ -44,7 +44,7 @@ module.exports = (function(){
 				}else{
 					console.log('Successfully updated.')
 					sendgrid.send({
-							to : ['santhonydo@gmail.com'],
+							to : ['anthony@meidcyne.com', 'tracy@medicyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'New Order!',
 							text: 'We got a new order!',
@@ -97,7 +97,7 @@ module.exports = (function(){
 						console.log("Successfully saved stripe customer id");
 
 						sendgrid.send({
-							to : ['santhonydo@gmail.com', 'me.tracy@gmail.com'],
+							to : ['anthony@medicyne.com', 'tracy@medicyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'New Order!',
 							text: 'We got a new order!',
