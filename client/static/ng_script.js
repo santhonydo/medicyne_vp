@@ -126,7 +126,13 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 		$http.post('/signup', info).success(function(success){
 			callback(success);
 		})
-	}
+	};
+
+	factory.premiumSignup = function(info, callback){
+		$http.post('/premiumSignup', info).success(function(success){
+			callback(success);
+		})
+	};
 
 	return factory;
 });
@@ -370,7 +376,7 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 			return;
 		}else{
 			var email = {email: $scope.premiumSignup.email};
-			medicyneAppFactory.signup(email, function(data){
+			medicyneAppFactory.premiumSignup(email, function(data){
 				if(data){
 					$state.go('premiumSignupSuccess');
 				}
