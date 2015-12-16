@@ -93,25 +93,25 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 	var factory = {};
 
 	factory.transferRx = function(info, callback){
-		$http.post('/transferRx/', info).success(function(success){
+		$http.post('/transferRx', info).success(function(success){
 			callback(success);
 		})
 	};
 
 	factory.billingInfo = function(info, callback){
-		$http.post('/billingInfo/', info).success(function(success){	
+		$http.post('/billingInfo', info).success(function(success){	
 			callback(success);
 		})
 	}
 
 	factory.newDelivery = function(info, callback){
-		$http.post('/newDelivery/', info).success(function(success){
+		$http.post('/newDelivery', info).success(function(success){
 			callback(success);
 		})
 	};
 
 	factory.getTransferRxInfo = function(info, callback){
-		$http.post('/getTransferRxInfo/', info).success(function(success){
+		$http.post('/getTransferRxInfo', info).success(function(success){
 			callback(success);
 		})
 	};
@@ -123,13 +123,13 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 	// };
 
 	factory.signup = function(info, callback){
-		$http.post('/signup/', info).success(function(success){
+		$http.post('/signup', info).success(function(success){
 			callback(success);
 		})
 	};
 
 	factory.premiumSignup = function(info, callback){
-		$http.post('/premiumSignup/', info).success(function(success){
+		$http.post('/premiumSignup', info).success(function(success){
 			callback(success);
 		})
 	};
