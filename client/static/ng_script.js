@@ -92,12 +92,6 @@ medicyneAppModule.config(function(StripeCheckoutProvider, $stateProvider, $urlRo
 medicyneAppModule.factory('medicyneAppFactory', function($http){
 	var factory = {};
 
-	factory.premiumAlert = function(info, callback){
-		$http.post('/premiumAlert', info).success(function(success){
-			callback(success);
-		})
-	};
-
 	factory.transferRx = function(info, callback){
 		$http.post('/transferRx', info).success(function(success){
 			callback(success);
@@ -134,6 +128,11 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 		})
 	};
 
+	factory.premiumAlert = function(info, callback){
+		$http.post('/premiumAlert', info).success(function(success){
+			callback(success);
+		})
+	};
 	return factory;
 });
 
@@ -375,8 +374,8 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 		if(angular.isUndefined($scope.premiumAlert.email)){
 			return;
 		}else{
-			var email = {email: $scope.premiumAlert.email};
-			medicyneAppFactory.premiumAlert(email, function(data){
+			
+			medicyneAppFactory.premiumAlert($scope.premiumAlert, function(data){
 				if(data){
 					$state.go('premiumSignupSuccess');
 				}

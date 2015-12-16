@@ -8,7 +8,6 @@ var Email = mongoose.model('Email');
 module.exports = (function(){
 	return {
 		signup: function(req, res){
-			var userInfo = req.body;
 			var email = new Email(req.body);
 
 			email.save(function(err, data){
@@ -32,6 +31,7 @@ module.exports = (function(){
 
 		premiumAlert: function(req, res){
 			var email = new Email(req.body);
+			
 			email.save(function(err, data){
 				if(err){
 					console.log('error adding email');
