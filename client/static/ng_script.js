@@ -109,7 +109,7 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 			callback(success);
 		})
 	};
-	
+
 	factory.getTransferRxInfo = function(info, callback){
 		$http.post('/getTransferRxInfo', info).success(function(success){
 			callback(success);
@@ -369,7 +369,7 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 		if(angular.isUndefined($scope.premiumSignup.email)){
 			return;
 		}else{
-			var email = {email: info.email};
+			var email = {email: $scope.premiumSignup.email};
 			medicyneAppFactory.signup(email, function(data){
 				console.log(data);
 				if(data){
