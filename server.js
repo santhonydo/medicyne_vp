@@ -4,8 +4,6 @@ var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
 
-app.set('views', __dirname);
-app.set('view engine', 'html');
 
 app.use(session({secret: 'medicyne2014'}));
 app.use(bodyParser.urlencoded({extended: true}));

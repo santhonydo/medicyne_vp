@@ -30,6 +30,5 @@ module.exports = function(app){
 
 	app.post('/premiumSignup', function(req, res){
 		emails.premiumSignup(req, res);
-	})
-
+	});
 }
