@@ -30,7 +30,7 @@ module.exports = (function(){
 			})	
 		},
 
-		premiumSignup: function(req, res){
+		premiumAlert: function(req, res){
 			var email = new Email(req.body);
 			email.save(function(err, data){
 				if(err){

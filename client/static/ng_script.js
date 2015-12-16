@@ -92,6 +92,12 @@ medicyneAppModule.config(function(StripeCheckoutProvider, $stateProvider, $urlRo
 medicyneAppModule.factory('medicyneAppFactory', function($http){
 	var factory = {};
 
+	factory.premiumAlert = function(info, callback){
+		$http.post('/premiumAlert', info).success(function(success){
+			callback(success);
+		})
+	};
+
 	factory.transferRx = function(info, callback){
 		$http.post('/transferRx', info).success(function(success){
 			callback(success);
@@ -102,7 +108,7 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 		$http.post('/billingInfo', info).success(function(success){	
 			callback(success);
 		})
-	}
+	};
 
 	factory.newDelivery = function(info, callback){
 		$http.post('/newDelivery', info).success(function(success){
@@ -124,12 +130,6 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 
 	factory.signup = function(info, callback){
 		$http.post('/signup', info).success(function(success){
-			callback(success);
-		})
-	};
-
-	factory.premiumSignup = function(info, callback){
-		$http.post('/premiumSignup', info).success(function(success){
 			callback(success);
 		})
 	};
@@ -371,12 +371,12 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 		}	
 	}
 
-	$scope.premiumSignup = function(){
-		if(angular.isUndefined($scope.premiumSignup.email)){
+	$scope.premiumAlertAction = function(){
+		if(angular.isUndefined($scope.premiumAlert.email)){
 			return;
 		}else{
-			var email = {name: 'premium', email: $scope.premiumSignup.email};
-			medicyneAppFactory.premiumSignup(email, function(data){
+			var email = {email: $scope.premiumAlert.email};
+			medicyneAppFactory.premiumAlert(email, function(data){
 				if(data){
 					$state.go('premiumSignupSuccess');
 				}

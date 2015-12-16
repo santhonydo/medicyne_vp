@@ -28,7 +28,7 @@ module.exports = function(app){
 		emails.signup(req, res);
 	});
 
-	app.post('/premiumSignup', function(req, res){
-		emails.premiumSignup(req, res);
+	app.post('/premiumAlert', function(req, res){
+		emails.premiumAlert(req, res);
 	});
 }
