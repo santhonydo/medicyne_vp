@@ -1,0 +1,48 @@
+<nav id="tf-menu" style="background-color: black; padding: 0px;" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Medicyne</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home" style="cursor: pointer;" class="page-scroll">Home</a></li>
+                <li><a ui-sref="faq" style="cursor: pointer;" class="page-scroll">FAQ</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="space"></div>
+
+<div class="container" ng-controller='DeliveryController'>
+	<div class="container text-center">
+	    <div class="section-title center">
+            <i class="color fa fa-check fa-4x"></i>
+            <h2 class="top-buffer"><strong>Order Confirmation</strong></h2>
+	        <div class="clearfix"></div>
+	    </div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8">
+    		<p>We have sent you an email confirmation. Our pharmacist will be intouch with you shortly to discuss your prescription price and answer any questions you may have.</p>
+            <p>If you have any questions, feel free to contact us at <a href="mailto:service@medicyne.com" >service@medicyne.com</a>.</p>
+  		</div>
+    </div>
+</div>
+
+<nav id="footer" class="navbar-fixed-bottom">
+    <div class="container">
+        <div class="pull-right fnav">
+            <p>MEDICYNE CORP © 2015. ALL RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</nav>

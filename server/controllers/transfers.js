@@ -7,7 +7,6 @@ var Transfer = mongoose.model('Transfer');
 module.exports = (function(){
 	return {
 		saveTransferRx: function(req, res){
-			console.log(req.body);
 			var transfer = new Transfer(req.body);
 
 			transfer.save(function(err, data){
@@ -22,16 +21,43 @@ module.exports = (function(){
 			})
 		},
 
+		addInsuranceInfo: function(req, res){
+			var userID = req.body.id;
+			var userInsuranceInfo = req.body.insuranceInfo;
+			
+			Transfer.findByIdAndUpdate(userID, {$set: {insuranceInfo: userInsuranceInfo}}, {new: true}, function(err, result){
+				if(err){
+					console.log('Error updating billing Info');
+				} else {
+					res.json(result)
+				}
+			})
+		},
+
 		updateTransferRxDelivery: function(req, res){
 			var userID = req.body.id;
 			var userDeliverySchedule = req.body.deliveryInfo;
 
-			Transfer.update({_id: userID}, {$set: {deliveryInfo: userDeliverySchedule}}, function(err){
+			Transfer.findByIdAndUpdate(userID, {$set: {deliveryInfo: userDeliverySchedule}}, {new: true},function(err, result){
 				if(err){
 					console.log('Error updating schedule time');
 				}else{
 					console.log('Successfully updated.')
-					res.json(req.body);
+					sendgrid.send({
+							to : ['santhonydo@gmail.com'],
+							from: 'service@medicyne.com',
+							subject: 'New Order!',
+							text: 'We got a new order!',
+							html: '<h1>Patient Information</h1><p>First Name: ' + result.firstName + '</p><p>Last Name: ' + result.lastName + '</p><p>Email: ' + result.email + '</p><p>DOB: ' + result.dob + '</p><p>Mobile: ' + result.phoneNumber + '</p><h1>Prescripiton Information</h1><p>Pharmacy: ' + result.pharmacyName + '</p><p>Pharmacy Phone: ' + result.pharmacyPhone + '</p><p>Prescription Info: ' + result.prescriptionsInfo + '</p><h1>Insurance Information</h1><p>Carrier Name: '+result.insuranceInfo.carrierName + '</p><p>Member ID Number: '+result.insuranceInfo.memberNumber + '</p><p>RxGroup: '+result.insuranceInfo.rxGroup + '</p><p>RxBin: '+result.insuranceInfo.rxBin + '</p><p>PCN: '+result.insuranceInfo.rxGroup + '</p><p>Get patient insurance from existing pharmacy: '+result.insuranceInfo.collect + '</p><p>Cash paying patient: '+result.insuranceInfo.cash + '</p><h1>Delivery Information</h1><p>Street: ' + result.deliveryInfo.street + '</p><p>City: ' + result.deliveryInfo.city + ' ' + result.deliveryInfo.zipcode + '</p><p>Delivery Time: ' + result.deliveryInfo.time + '</p>'
+						});	
+					sendgrid.send({
+						to : [result.email],
+							from: 'service@medicyne.com',
+							subject: 'New Order!',
+							text: 'We got a new order!',
+							html: '<h1>Thank You For Using Medicyne!</h1><p>Hi ' + result.firstName + ',</p><p>This email is to confirm that we have received your prescription order.  Our pharmacist will contact you within 1 hour to confirm your prescription price and delivery time.</p><p>Feel free to contact us at service@medicyne.com for any questions regarding your prescripitons.</p><p>Thank you,</p><p>The Medicyne Team</p>'
+					});
+					res.json(result);
 				}
 			})
 
@@ -40,10 +66,8 @@ module.exports = (function(){
 		getTransferRxInfo: function(req, res){
 			Transfer.find({_id: req.body.id}, function(err, results){
 				if(err){
-					console.log('Error retrieving transfer rx info');
+					return;
 				}else{
-					console.log('Got pharmacy choice: ' + results[0].transferRx);
-
 					res.json(results);
 				}
 			})

@@ -8,12 +8,15 @@ module.exports = function(app){
 		transfers.saveTransferRx(req, res);
 	});
 
+	app.post('/billingInfo', function (req, res){
+		transfers.addInsuranceInfo(req, res);
+	});
+
 	app.post('/newDelivery', function(req, res){
 		transfers.updateTransferRxDelivery(req, res);
 	});
 
 	app.post('/getTransferRxInfo', function (req, res){
-		console.log('in routes getTransferRxInfo user id: ' + req.body.id);
 		transfers.getTransferRxInfo(req, res);
 	});
 
@@ -23,7 +26,6 @@ module.exports = function(app){
 
 	app.post('/signup', function (req, res){
 		emails.signup(req, res);
-	})
-
+	});
 
 }

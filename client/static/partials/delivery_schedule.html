@@ -1,20 +1,38 @@
+<nav id="tf-menu" style="background-color: black; padding: 0px;" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Medicyne</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home" style="cursor: pointer;" class="page-scroll">Home</a></li>
+                <li><a ui-sref="faq" style="cursor: pointer;" class="page-scroll">FAQ</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="space"></div>
+
 <div class="container" ng-controller='DeliveryController'>
 	<div class="container text-center">
-	    <div class="space"></div>
-		<div class="row">
-			<div class="col-md-offset-8 col-md-2">
-				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
-			</div>
-			<div class="col-md-2"></div>
-		</div> 
 		<div class="top-buffer row">
 			<div class="text-center">
-				<!-- <h4><strong>Prescription Order (Step 1 of 3)</strong></h4> -->
-				<i style="margin-right: 20px; opacity:0.5" class="fa fa-file-text fa-2x"></i>
-				<i style="margin-right: 20px; vertical-align: top; padding-top: 8px; opacity:0.5" class="fa fa-caret-right fa-1x"></i>
-				<i style=" margin-right: 20px" class="color fa fa-car fa-2x"></i>
-				<i style=" margin-right: 20px; vertical-align: top; padding-top: 8px" class="fa fa-caret-right fa-1x"></i>
-				<i style="opacity:0.5" class="fa fa-money fa-2x"></i>
+			<!-- <h4><strong>Prescription Order (Step 1 of 3)</strong></h4> -->
+				 <i style="margin-right: 20px; opacity: 0.5" class="fa fa-file-text fa-2x"></i>
+				 <i style="margin-right: 20px; vertical-align: top; padding-top: 8px; opacity:0.5" class="fa fa-caret-right fa-1x"></i>
+				 <i style=" margin-right: 20px; opacity: 0.5" class="fa fa-credit-card fa-2x"></i>
+				 <i style=" margin-right: 20px; vertical-align: top; padding-top: 8px; opacity: 0.5" class="fa fa-caret-right fa-1x"></i>
+				 <i class="color fa fa-car fa-2x"></i>
 			</div>
 		</div>
 	    <div class="section-title center">
@@ -31,6 +49,11 @@
 				<p class="pull-right btn" style="color:green"><em>Clear Form</em></p>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-offset-2">
+	    		<span ng-bind="error" style="color: red; padding-left: 15px"></span>	
+	    	</div>
+	    </div>
 		<div class="row">
 			<div class="col-md-offset-2 col-md-4">
 	    		<label><strong>Street Address</strong></label>
@@ -59,6 +82,11 @@
 	    		<label><strong>Preferred Delivery Times</strong></label>
 	    	</div>
 	    </div>
+	    <div class=" row">
+	    	<div class="col-md-offset-2 col-md-8">
+	    		<p><em>Select a time below if you would like same day delivery ($10 charge within San Francisco). Otherwise, leave blank and your prescription will be delivered within 3-5 business days free of charge.</em></p>
+	    	</div>
+	    </div>
 	    <div class="row">
 	    	<div class="col-md-offset-2 col-md-2 col-sm-10 col-xs-10">
 	    		<label class="radio-inline">
@@ -83,8 +111,15 @@
 	    </div>
 		<div class="top-buffer col-md-offset-2 col-md-8">
 			<input id="submit" class="btn btn-success pull-left" type="submit" value="Back" ng-click="backBtn()">
-			<input id="submit" class="btn btn-success pull-right" type="submit" value="Next" ng-click="newDelivery()">
+			<input style="margin-bottom: 100px" id="submit" class="btn btn-success pull-right" type="submit" value="Next" ng-click="newDelivery()">
 		</div>
 	</form>
-	<div class="space"></div>
 </div>
+
+<nav id="footer" class="navbar-fixed-bottom">
+    <div class="container">
+        <div class="pull-right fnav">
+            <p>MEDICYNE CORP © 2015. ALL RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</nav>

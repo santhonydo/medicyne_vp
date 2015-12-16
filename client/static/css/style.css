@@ -155,7 +155,7 @@ font-weight: 900;
 
 .content{
 	position: relative;
-	padding: 20% 0 0;
+	padding: 120px 0 0;
 }
 
 .color{
@@ -187,7 +187,7 @@ a.fa.fa-angle-down {
 	border: 2px solid #b4b4b4;
 	border-radius: 50%;
 	font-size: 24px;
-	margin-top: 120px;
+	margin: 30px 0px;
 	transition: all 0.5s;
 }
 a.fa.fa-angle-down:hover{

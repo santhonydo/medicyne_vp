@@ -1,11 +1,28 @@
+<nav id="tf-menu" style="background-color: black; padding: 0px;" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Medicyne</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home" style="cursor: pointer;" class="page-scroll">Home</a></li>
+                <li><a ui-sref="order" style="cursor: pointer;" class="page-scroll">Order</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
 <div class="container text-center">
 	    <div class="space"></div>
-		<div class="row">
-			<div class="col-md-offset-8 col-md-2">
-				<a href="#/" class="pull-right"><i class="fa fa-times-circle fa-2x"></i></a>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
 		<div class="top-buffer row">
 			<div class="text-center">
 				 <i class="color fa fa-envelope fa-4x"></i>
@@ -28,9 +45,10 @@
 	  		</div>
 	  		<div class="col-md-4">
 	  			<label><strong>Email</strong></label>
-	    		<input type="email" name="email" ng-model="signup.email" class="form-control" required>
+	    		<input type="email" name="email" ng-model="signup.email" class="form-control" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
 	    		<div ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
-    				<div ng-messages-include="../static/partials/messages.html"></div>
+    				<div ng-message="required"><p style="color: red">This field is required</p></div>
+                    <div ng-message="pattern"><p style="color: red">Invalid Email</p></div>
 				</div>
 	    	</div>
 	    </div>
@@ -48,9 +66,16 @@
 	    		<input type="text" name="state" ng-model="signup.zipcode" class="form-control">
 	    	</div>
 	    </div>
-		<div class="top-buffer text-center">
+		<div class="top-buffer text-center" style="margin-bottom: 100px">
 			<input class="btn btn-success" type="submit" value="Submit" ng-click="emailSignup()">		
 		</div>
 	</div>
-	<div class="space"></div>
 </form>
+
+<nav id="footer" class="navbar-fixed-bottom">
+    <div class="container">
+        <div class="pull-right fnav">
+            <p>MEDICYNE CORP © 2015. ALL RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</nav>

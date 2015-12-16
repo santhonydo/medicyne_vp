@@ -1,68 +1,110 @@
-var medicyneAppModule = angular.module('medicyneApp', ['ngRoute', 'ngMessages', 'stripe.checkout', 'ngCookies', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics']);
+var medicyneAppModule = angular.module('medicyneApp', ['ngMessages', 'stripe.checkout', 'ngCookies', 'ui.bootstrap', 'angulartics', 'angulartics.google.analytics', 'ui.router', 'ngRoute', 'ngStorage']);
 
 medicyneAppModule.config(function ($analyticsProvider) {
             $analyticsProvider.firstPageview(true); /* Records pages that don't use $state or $route */
             $analyticsProvider.withAutoBase(true);  /* Records full path */
         });
 
-medicyneAppModule.config(function($routeProvider, StripeCheckoutProvider){
+medicyneAppModule.config(function(StripeCheckoutProvider, $stateProvider, $urlRouterProvider){
 	StripeCheckoutProvider.defaults({
-		key: 'pk_live_OXNGP4KluZ8nTkm4rypVJwZa'
+		// key: ''
 	});
+		$urlRouterProvider.otherwise('/home')
 
-	$routeProvider
-		.when('/', {
-			templateUrl: '/static/partials/homepage.html'
-		})
-		.when('/order', {
-			templateUrl: '/static/partials/tx_form.html'
-		})
-		.when('/signup', {
-			templateUrl: '/static/partials/signup.html'
-		})
-		.when('/delivery_schedule/:id', {
-			templateUrl: '/static/partials/delivery_schedule.html'
-		})
-		.when('/payment/:id', {
-			templateUrl: '/static/partials/payment.html',
-			resolve: {
-				stripe: StripeCheckoutProvider.load
-			}
-		})
-		.when('/payment_success', {
-			templateUrl: '/static/partials/payment_success.html'
-		})
-		.when('/signup_success', {
-			templateUrl: '/static/partials/signup_success.html'
-		})
-		.otherwise({
-			redirectTo: '/'
-		});
+		$stateProvider
+			.state('home', {
+				url: '/home',
+				templateUrl: '/static/partials/homepage.html',
+				controller: 'HomepageController'
+			})
+
+			.state('faq', {
+				url: '/faq',
+				templateUrl: '/static/partials/faq.html'
+			})
+
+			.state('premium', {
+				url: '/premium',
+				templateUrl: '/static/partials/premium_services.html'
+			})
+
+			.state('signup', {
+				url: '/signup',
+				controller: 'SignupController',
+				templateUrl: '/static/partials/signup.html'
+			})
+
+			.state('order', {
+				url: '/order',
+				controller: 'TransferRxController',
+				templateUrl: '/static/partials/tx_form.html'
+			})
+
+			.state('billing', {
+				url: '/billing',
+				controller: 'BillingController',
+				templateUrl: '/static/partials/billing.html',
+				params: {
+					obj: null
+				}
+			})
+
+			.state('deliverySchedule', {
+				url: '/deliverySchedule',
+				controller: 'DeliveryController',
+				templateUrl: '/static/partials/delivery_schedule.html',
+				params: {
+					obj: null
+				}
+			})
+
+			.state('orderConfirmation', {
+				url: '/orderConfirmation',
+				templateUrl: '/static/partials/success.html',
+				params: {
+					obj: null
+				}
+			})
+
+			.state('premiumSignupSuccess', {
+				url: '/premiumSignupSuccess',
+				templateUrl: '/static/partials/premium_signup_success.html'
+			})
+
+			.state('signupSuccess', {
+				url: '/signupSuccess',
+				templateUrl: '/static/partials/signup_success.html'
+			})
 });
 
-medicyneAppModule.run(function($log, StripeCheckout, $cookies){
-	StripeCheckout.defaults({
-		opened: function(){
-			// $log.debug("Stripe Checkout opened");
-		},
-		closed: function(){
-			// $log.debug("Stripe Checkout closed");
-		}
-	})
-});
+
+// medicyneAppModule.run(function($log, StripeCheckout, $cookies){
+// 	StripeCheckout.defaults({
+// 		opened: function(){
+// 			// $log.debug("Stripe Checkout opened");
+// 		},
+// 		closed: function(){
+// 			// $log.debug("Stripe Checkout closed");
+// 		}
+// 	})
+// });
 
 medicyneAppModule.factory('medicyneAppFactory', function($http){
 	var factory = {};
 
 	factory.transferRx = function(info, callback){
-		// console.log("factory data: " + info.pharmChoice)
 		$http.post('/transferRx', info).success(function(success){
 			callback(success);
 		})
 	};
 
+	factory.billingInfo = function(info, callback){
+		$http.post('/billingInfo', info).success(function(success){	
+			callback(success);
+		})
+	}
+
 	factory.newDelivery = function(info, callback){
-		// console.log("factory schedule data: " + info.id);
 		$http.post('/newDelivery', info).success(function(success){
 			callback(success);
 		})
@@ -74,11 +116,11 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 		})
 	};
 
-	factory.charge = function(info, callback){
-		$http.post('/charge', info).success(function(success){
-			callback(success);
-		})
-	};
+	// factory.charge = function(info, callback){
+	// 	$http.post('/charge', info).success(function(success){
+	// 		callback(success);
+	// 	})
+	// };
 
 	factory.signup = function(info, callback){
 		$http.post('/signup', info).success(function(success){
@@ -89,19 +131,8 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 	return factory;
 });
 
-// medicyneAppModule.controller('QuitController', function($scope, $uibModalInstance){
-	// console.log('in quitConfirmation controller');
-	// $scope.open = function($event){
-	// 	$event.preventDefault();
-	// 	$event.stopPropagation();
-	// 	$scope.opened = true;
-	// }
-	// $scope.closeOut = function(){
-	// 	$uibModalInstance.close();
-	// }
-// })
 
-medicyneAppModule.controller('HomepageController', function($scope, $route, $location, $routeParams, medicyneAppFactory, $anchorScroll, $cookies){
+medicyneAppModule.controller('HomepageController', function($scope, $state, $location, medicyneAppFactory, $anchorScroll, $cookies){
 	$scope.scrollTo = function(id){
 		var old = $location.hash();
 		$location.hash(id);
@@ -111,23 +142,22 @@ medicyneAppModule.controller('HomepageController', function($scope, $route, $loc
 
 	$scope.goOrder = function() {
 		if (angular.isUndefined($scope.newOrder)){
-
+			return;
 		} else {
 			$cookies.put('prescriptionsInfo', $scope.newOrder.prescriptionsInfo)
-			$location.path('/order/')
+			$state.go('order')
 		}
 	}
-
-
 })
 
-medicyneAppModule.controller('TransferRxController', function($scope, $route, $location, $routeParams, medicyneAppFactory, $cookies){
-	
+medicyneAppModule.controller('TransferRxController', function($scope, $window, $state, medicyneAppFactory, $cookies, $localStorage){
+
 	var allCookies = $cookies.getAll();
 	$scope.newTransferRx = allCookies;
 	
 
 	$scope.reset = function(){
+		console.log('reset')
 		$cookies.remove('firstName');
 		$cookies.remove('lastName');
 		$cookies.remove('dob');
@@ -135,70 +165,83 @@ medicyneAppModule.controller('TransferRxController', function($scope, $route, $l
 		$cookies.remove('pharmacyName');
 		$cookies.remove('pharmacyPhone');
 		$cookies.remove('prescriptionsInfo');
-		$route.reload();
+		$cookies.remove('email');
+		$window.location.reload()
 	}
 
 	$scope.transferRx = function(){
-		if(angular.isUndefined($scope.newTransferRx)){
-			// console.log('All fields empty');
-		}else if(angular.isUndefined($scope.newTransferRx.pharmChoice)){
-			// console.log('Missing pharmacy choice');
-		}else{
-			var keys = Object.keys($scope.newTransferRx).length;
-			if(keys < 8){
-				// console.log("Not all fields are entered");
-			}else if(angular.isUndefined($scope.newTransferRx.phoneNumber) || angular.isUndefined($scope.newTransferRx.pharmacyPhone)){
-				// console.log("Wrong phone number!");
-			}else{
-				if($scope.newTransferRx.pharmChoice === 'other'){
-					$scope.newTransferRx.transferRx = false;
-				}
-				medicyneAppFactory.transferRx($scope.newTransferRx, function(data){
-					// console.log("ObjectID: " + data._id);
-					var userID = data._id;
-					$cookies.put('firstName', data.firstName);
-					$cookies.put('lastName', data.lastName);
-					$cookies.put('dob', data.dob);
-					$cookies.put('phoneNumber', data.phoneNumber);
-					$cookies.put('pharmacyName', data.pharmacyName);
-					$cookies.put('pharmacyPhone', data.pharmacyPhone);
-					$cookies.put('prescriptionsInfo', data.prescriptionsInfo);
-					$location.path('/delivery_schedule/' + userID);
-				})
-			}
-		}	
-	}
+		if(
+			(angular.isUndefined($scope.newTransferRx.firstName) || angular.isUndefined($scope.newTransferRx.lastName) || angular.isUndefined($scope.newTransferRx.dob) || angular.isUndefined($scope.newTransferRx.phoneNumber) || angular.isUndefined($scope.newTransferRx.email) || angular.isUndefined($scope.newTransferRx.pharmacyName) || angular.isUndefined($scope.newTransferRx.pharmacyPhone) || angular.isUndefined($scope.newTransferRx.prescriptionsInfo)) 
 
-	$scope.samePx = function(){
-		$scope.newRx.transferRx = false;
 
-		if(typeof $scope.newRx == 'undefined'){
-			// console.log('All fields empty');
+			|| ($scope.newTransferRx.firstName == "" || $scope.newTransferRx.lastName == ""|| $scope.newTransferRx.dob == ""|| $scope.newTransferRx.phoneNumber == ""|| $scope.newTransferRx.email == ""|| $scope.newTransferRx.pharmacyName == ""|| $scope.newTransferRx.pharmacyPhone == ""|| $scope.newTransferRx.prescriptionsInfo == "")
+			 ){
+				$scope.error = "Please enter all required fields.";
 		}else{
-			var keys = Object.keys($scope.newRx).length;
-			if(keys < 7){
-				// console.log("Not all fields are entered");
-			}else{
-				// console.log($scope.newRx);
-				medicyneAppFactory.transferRx($scope.newRx, function(data){
-					// console.log("ObjectID: " + data._id);
-					var userID = data._id;
-					$cookies.put('firstName', data.firstName);
-					$cookies.put('lastName', data.lastName);
-					$cookies.put('dob', data.dob);
-					$cookies.put('phoneNumber', data.phoneNumber);
-					$cookies.put('pharmacyName', data.pharmacyName);
-					$cookies.put('pharmacyPhone', data.pharmacyPhone);
-					$cookies.put('prescriptionsInfo', data.prescriptionsInfo);
-					$location.path('/delivery_schedule/' + userID);
-				})
-			}
-		}	
+			medicyneAppFactory.transferRx($scope.newTransferRx, function(data){
+				$scope.error = "";
+				$cookies.put('firstName', data.firstName);
+				$cookies.put('lastName', data.lastName);
+				$cookies.put('dob', data.dob);
+				$cookies.put('phoneNumber', data.phoneNumber);
+				$cookies.put('pharmacyName', data.pharmacyName);
+				$cookies.put('pharmacyPhone', data.pharmacyPhone);
+				$cookies.put('prescriptionsInfo', data.prescriptionsInfo);
+				$cookies.put('email', data.email);
+				$localStorage.userID = data._id;
+				$state.go('billing', {obj:data});
+			})
+		}
 	}
 });
 
-medicyneAppModule.controller('DeliveryController', function($scope, $route, $location, $routeParams, medicyneAppFactory, $cookies){
-	
+medicyneAppModule.controller('BillingController', function($scope, $window, $state, $stateParams, medicyneAppFactory, $cookies, $localStorage){
+
+	var allCookies = $cookies.getAll();
+	$scope.insuranceInfo = allCookies;
+
+	$scope.insuranceInfo.cash = false;
+	$scope.insuranceInfo.collect = false;
+
+	var userID = $localStorage.userID;
+
+	$scope.reset = function(){
+		console.log('reset')
+		$cookies.remove('carrierName');
+		$cookies.remove('memberNumber');
+		$cookies.remove('rxGroup');
+		$cookies.remove('rxBin');
+		$cookies.remove('pcn');
+		$window.location.reload()
+	}
+
+	$scope.newInsurance = function(){
+		var userInsuranceData = {'carrierName' : $scope.insuranceInfo.carrierName, 'memberNumber' : $scope.insuranceInfo.memberNumber, 'rxGroup' : $scope.insuranceInfo.rxGroup, 'rxBin' : $scope.insuranceInfo.rxBin, 'pcn' : $scope.insuranceInfo.pcn, 'cash' : $scope.insuranceInfo.cash, 'collect' : $scope.insuranceInfo.collect};
+		var userInsuranceInfo = {id: userID, insuranceInfo: userInsuranceData};
+
+		if(($scope.insuranceInfo.cash == false && $scope.insuranceInfo.collect == false) && ((angular.isUndefined($scope.insuranceInfo.carrierName) || angular.isUndefined($scope.insuranceInfo.memberNumber) || angular.isUndefined($scope.insuranceInfo.rxGroup) || angular.isUndefined($scope.insuranceInfo.rxBin) || angular.isUndefined($scope.insuranceInfo.pcn)) || ($scope.insuranceInfo.carrierName == "" || $scope.insuranceInfo.memberNumber == "" || $scope.insuranceInfo.rxGroup == ""|| $scope.insuranceInfo.rxBin == "" || $scope.insuranceInfo.pcn == ""))) {
+			$scope.error = "Please enter your complete insurance information or check one of the options below.";
+		}else {
+			$scope.error = "";
+			medicyneAppFactory.billingInfo(userInsuranceInfo, function(data){
+				var insuranceInfo = data.insuranceInfo
+				$cookies.put('carrierName', insuranceInfo.carrierName);
+				$cookies.put('memberNumber', insuranceInfo.memberNumber);
+				$cookies.put('rxGroup', insuranceInfo.rxGroup);
+				$cookies.put('rxBin', insuranceInfo.rxBin);
+				$cookies.put('pcn', insuranceInfo.pcn);
+				$cookies.put('cash', insuranceInfo.cash);
+				$cookies.put('collect', insuranceInfo.collect);
+				$state.go('deliverySchedule', {obj: data});
+			})
+		}
+		
+	}
+})
+
+medicyneAppModule.controller('DeliveryController', function($scope, $window, $state, $stateParams, medicyneAppFactory, $cookies, $localStorage){
+	var userID = $localStorage.userID;
+
 	var allCookies = $cookies.getAll();
 	$scope.deliverySchedule = allCookies;
 	
@@ -208,88 +251,92 @@ medicyneAppModule.controller('DeliveryController', function($scope, $route, $loc
 		$cookies.remove('city');
 		$cookies.remove('zipcode');
 		$cookies.remove('time');
-		$route.reload();
+		$window.location.reload()
 	}
 
 	$scope.backBtn = function(){
-
-		$location.path('/order/');
+		$state.go('billing', {obj: $stateParams.obj});
 	}
 
 	$scope.newDelivery = function(){
-		var userDeliveryInfo = {id: $routeParams.id, deliveryInfo: $scope.deliverySchedule};
+		var userDeliverySchedule = {'street' : $scope.deliverySchedule.street, 'city' : $scope.deliverySchedule.city, 'zipcode' : $scope.deliverySchedule.zipcode, 'time' : $scope.deliverySchedule.time}
+		var userDeliveryInfo = {id: userID, deliveryInfo: userDeliverySchedule};
+		
 
 		if(angular.isUndefined($scope.deliverySchedule)){
-			// console.log('All fields empty');
+			$scope.error = "Please enter all required fields.";
 		}else if (!('street' in $scope.deliverySchedule) || !('city' in $scope.deliverySchedule) || !('zipcode' in $scope.deliverySchedule)) {
-			// console.log("Empty fields")
+			$scope.error = "Please enter all required fields.";
 		}else if (angular.isUndefined($scope.deliverySchedule.street) || angular.isUndefined($scope.deliverySchedule.city) || angular.isUndefined($scope.deliverySchedule.zipcode)){
-			// console.log("Empty touched fields");
+			$scope.error = "Please enter all required fields.";
 		}else{
 			medicyneAppFactory.newDelivery(userDeliveryInfo, function(data){
-				var userID = data.id;
+				$scope.error = "";
 				$cookies.put('time', data.deliveryInfo.time);
 				$cookies.put('street', data.deliveryInfo.street);
 				$cookies.put('city', data.deliveryInfo.city);
 				$cookies.put('zipcode', data.deliveryInfo.zipcode);
-				$location.path('/payment/' + userID);
+				console.log(data);
+				if(data){
+					$state.go('orderConfirmation', {obj: data});
+				}
 			})
 		}
 	}
 });
 
-medicyneAppModule.controller('PaymentController', function($scope, $location, $routeParams, medicyneAppFactory, StripeCheckout, $cookies){
+// medicyneAppModule.controller('PaymentController', function($scope, $location, medicyneAppFactory, StripeCheckout, $cookies){
 
-	var userID = {id: $routeParams.id};
+// 	var userID = {id: $routeParams.id};
 
-	$scope.addressEdit = function(){
-		$location.path('/delivery_schedule/' + $routeParams.id);
-	}
+// 	$scope.addressEdit = function(){
+// 		$location.path('/delivery_schedule/' + $routeParams.id);
+// 	}
 	
-	$scope.rxInfoEdit = function(){
-		$location.path('/order/');
-	}
+// 	$scope.rxInfoEdit = function(){
+// 		$location.path('/order/');
+// 	}
 
-	medicyneAppFactory.getTransferRxInfo(userID, function(data){
-		$scope.userData = data[0];
-		// console.log($scope.userData);
-	})
+// 	medicyneAppFactory.getTransferRxInfo(userID, function(data){
+// 		$scope.userData = data[0];
+// 		// console.log($scope.userData);
+// 	})
 
-	var handler = StripeCheckout.configure({
-    		image: '../static/img/medicyne_full_logo.jpeg',
-    		locale: 'auto',
-    		token: function(token) {
-    			token.customerID = $routeParams.id;
-    			// console.log('got token: ' + token.id + ' ' + token.customerID);
-		    	medicyneAppFactory.charge(token, function(data){
-		    		if(typeof data !== 'undefined'){
-		    			$cookies.remove('firstName');
-						$cookies.remove('lastName');
-						$cookies.remove('dob');
-						$cookies.remove('phoneNumber');
-						$cookies.remove('pharmacyName');
-						$cookies.remove('pharmacyPhone');
-						$cookies.remove('prescriptionsInfo');
-						$cookies.remove('street');
-						$cookies.remove('city');
-						$cookies.remove('zipcode');
-						$cookies.remove('time');
-		    			$location.path('/payment_success');
-		    		}
-		    	})
-		    }
-  		});
+// 	var handler = StripeCheckout.configure({
+//     		image: '../static/img/medicyne_full_logo.jpeg',
+//     		locale: 'auto',
+//     		token: function(token) {
+//     			token.customerID = $routeParams.id;
+//     			// console.log('got token: ' + token.id + ' ' + token.customerID);
+// 		    	medicyneAppFactory.charge(token, function(data){
+// 		    		if(typeof data !== 'undefined'){
+// 		    			$cookies.remove('firstName');
+// 						$cookies.remove('lastName');
+// 						$cookies.remove('dob');
+// 						$cookies.remove('phoneNumber');
+// 						$cookies.remove('pharmacyName');
+// 						$cookies.remove('pharmacyPhone');
+// 						$cookies.remove('prescriptionsInfo');
+// 						$cookies.remove('street');
+// 						$cookies.remove('city');
+// 						$cookies.remove('zipcode');
+// 						$cookies.remove('time');
+// 		    			$location.path('/payment_success');
+// 		    		}
+// 		    	})
+// 		    }
+//   		});
 
-	$scope.payment = function(){
-  		handler.open({
-  			name: 'Medicyne Virtual Pharmacy',
-  			description: 'Prescription order desposit',
-  			amount: 500
-  		});
-	}
-});
+// 	$scope.payment = function(){
+//   		handler.open({
+//   			name: 'Medicyne Virtual Pharmacy',
+//   			description: 'Prescription order desposit',
+//   			amount: 500
+//   		});
+// 	}
+// });
 
-medicyneAppModule.controller('SignupController', function($scope, $location, medicyneAppFactory, $cookies){
+medicyneAppModule.controller('SignupController', function($scope, $location, medicyneAppFactory, $state, $cookies){
 		
 	$cookies.remove('firstName');
 	$cookies.remove('lastName');
@@ -312,10 +359,24 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 			medicyneAppFactory.signup($scope.signup, function(data){
 				// console.log(data);
 				if(data){
-					$location.path('/signup_success');	
+					$state.go('signupSuccess');
 				}
 			})
 		}	
+	}
+
+	$scope.premiumSignup = function(){
+		if(angular.isUndefined($scope.premiumSignup.email)){
+			return;
+		}else{
+			var email = {email: info.email};
+			medicyneAppFactory.signup(email, function(data){
+				console.log(data);
+				if(data){
+					$state.go('premiumSignupSuccess');
+				}
+			})
+		}
 	}
 });
 

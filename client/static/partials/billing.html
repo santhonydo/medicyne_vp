@@ -1,0 +1,106 @@
+<nav id="tf-menu" style="background-color: black; padding: 0px;" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="navbarCollapsed = !navbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Medicyne</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home" style="cursor: pointer;" class="page-scroll">Home</a></li>
+                <li><a ui-sref="faq" style="cursor: pointer;" class="page-scroll">FAQ</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="space"></div>
+
+<div class="container" ng-controller='BillingController'>	
+	<div class="container text-center">
+		<div class="top-buffer row">
+			<div class="text-center">
+				 <i style="margin-right: 20px; opacity: 0.5" class="fa fa-file-text fa-2x"></i>
+				 <i style="margin-right: 20px; vertical-align: top; padding-top: 8px; opacity:0.5" class="fa fa-caret-right fa-1x"></i>
+				 <i style=" margin-right: 20px;" class="color fa fa-credit-card fa-2x"></i>
+				 <i style=" margin-right: 20px; vertical-align: top; padding-top: 8px;" class="fa fa-caret-right fa-1x"></i>
+				 <i style="opacity:0.5" class="fa fa-car fa-2x"></i>
+			</div>
+		</div>
+	    <div class="section-title center">
+	        <h2><strong>Insurance</strong></h2>
+	        <div class="clearfix"></div>
+	        <div class="col-md-offset-1 col-md-10">
+	            <p class="intro"><em>Now we just need your insurance information to process your prescription.</em></p>
+	        </div>
+	    </div>
+	</div>
+
+	<form name="transferRxForm" novalidate>   
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8" ng-click="reset()"><p class="pull-right btn" style="color:green"><em>Clear Form</em></p></div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2">
+	    		<span ng-bind="error" style="color: red; padding-left: 15px"></span>	
+	    	</div>
+	    </div>
+		<div class="top-buffer row">
+			<div class="col-md-offset-2 col-md-4">
+	    		<label><strong>Insurance Carrier</strong></label>
+	    		<input type="text" name="carrierName" class="form-control" placeholder="Blue Cross" ng-model="insuranceInfo.carrierName">
+	  		</div>
+	  		<div class="col-md-4">
+	  			<label><strong>Member Identification Number</strong></label>
+	    		<input type="text" name="memberNumber" class="form-control" placeholder="XPJ325M82333" ng-model="insuranceInfo.memberNumber">
+	    		
+	    	</div>
+		</div>
+		<div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-4">
+      			<label><strong>Rx Group</strong></label>
+      			<input type="text" name="rxGroup" class="form-control" placeholder="FDCUSCVS" ng-model="insuranceInfo.rxGroup">
+    		</div>
+    		<div class="col-md-4">
+	  			<label><strong>Rx Bin</strong></label>
+	    		<input type="text" name="rxBin" class="form-control" placeholder="623423" ng-model="insuranceInfo.rxBin">
+	    	</div>
+		</div>
+		<div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-4">
+      			<label><strong>PCN</strong></label>
+      			<input type="text" name="pcn" class="form-control" placeholder="5555" ng-model="insuranceInfo.pcn">
+    		</div>
+    		
+		</div>
+		<div class="top-buffer row">
+	    	<div class="col-md-offset-2 col-md-4">
+      			<p><input type="checkbox" ng-model="insuranceInfo.cash"> <em>Pay full prescription price <span style="color: red;"> without</span> insurance.</em></p>
+    		</div>
+    		<div class="col-md-4">
+	  			<p><input type="checkbox" ng-model="insuranceInfo.collect"> <em>Gather insurance from my exisiting pharmacy.</em></p>
+	    	</div>
+    	</div>
+		
+		<div class="top-buffer col-md-offset-2 col-md-8">
+			<input id="submit" class="btn btn-success pull-left" type="submit" value="Back" ui-sref="order">
+			<input style="margin-bottom: 100px" id="submit" class="btn btn-success pull-right" type="submit" value="Next" ng-click="newInsurance()">
+		</div>
+
+	</form>	
+</div>
+
+<nav id="footer" class="navbar-fixed-bottom">
+    <div class="container">
+        <div class="pull-right fnav">
+            <p>MEDICYNE CORP © 2015. ALL RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</nav>

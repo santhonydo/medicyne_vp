@@ -1,0 +1,95 @@
+<nav id="tf-menu" style="background-color: black; padding: 0px;" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" ng-click="navbarCollapsed = !navbarCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Medicyne</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ui-sref="home" style="cursor: pointer;" class="page-scroll">Home</a></li>
+                <li><a ui-sref="order" style="cursor: pointer;" class="page-scroll">Order</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="space"></div>
+
+<div class="container" ng-controller="SignupController">
+    <div class="section-title center text-center">
+        <h2>What's included in medicyne premium</h2>
+        <div class="line">
+            <hr>
+        </div>
+    </div>
+    <div>
+        <div id="us" class="text-center">
+            <div id="tf-services" style="padding: 0px 0px">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4 col-md-offset-1 col-md-4 col-lg-offset-1 col-lg-4 top-buffer">
+                            <i class="fa fa-clipboard color"></i>
+                            <h4><strong>System Review</strong></h4>
+                            <p style="text-align: justify;">Initial comprehensive health review and explanation of your medications and treatment plan.</p>
+                        </div>  
+                        <div class="col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-4 col-lg-offset-2 col-lg-4 top-buffer">
+                            <i class="fa fa-sort-alpha-asc color"></i>
+                            <h4><strong>Treatment Goals</strong></h4>
+                            <p style="text-align: justify;">Treatment breakdown into simpler steps, possible because of the shorter time between follow-ups with the Medicyne Premium program.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-4 col-md-4 col-lg-4 top-buffer">
+                            <i class="fa fa-mobile color"></i>
+                            <h4><strong>Active Monitor</strong></h4>
+                            <p style="text-align: justify;">Monthly (or more frequent if needed) calls to assess progress towards your treatment and health goals, ensure medications are taken properly, manage effects of medications, and check for adverse reactions.</p>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-4 col-lg-offset-2 col-lg-4 top-buffer">
+                            <i class="fa fa-user color"></i>
+                            <h4><strong>Personalized Care</strong></h4>
+                            <p style="text-align: justify;">By taking the time to understand your situation, your personal pharmacist can work with your doctor to tailor your treatment to your lifestyle and activity needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="space"></div>
+            <h3 class="color">Only $19.99 per month for Premium</h3>
+            <p class="intro"><em>Get the peace of mind of having a trusted healthcare provider always looking out for you.</em></p>
+            <p class="intro">Sign up for Medicyne Premium today!</p>
+            <form name="premiumSignupForm" novalidate>
+                <div class="row">
+                    <div class="col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 top-buffer">
+                        <input type="text" name="email" class="form-control" placeholder="example@email.com" ng-model="premiumSignup.email" style="opacity: 0.8; color: #18A69C; border-radius: 5px; text-align: center; font-size: 15px; height: 35px" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/">
+                    </div>
+                </div>
+                <div class="row">
+                    <div ng-messages="premiumSignupForm.email.$error" ng-if="premiumSignupForm.email.$touched">
+                        <div ng-message="required"><p style="color: red">This field is required</p></div>
+                        <div ng-message="pattern"><p style="color: red">Invalid Email</p></div>
+                    </div>
+                </div>
+                <div class="row">   
+                    <div class="text-center top-buffer" style="margin-bottom: 100px">
+                        <button class="btn btn-default" style="background-color: #18A69C" ng-click="premiumSignup()"><a style="color:white;" >Connect me to my personal pharmacist!</a></button>
+                    </div>
+                </div>
+            </form>
+        </div>    
+    </div>
+</div>
+
+<nav id="footer">
+    <div class="container">
+        <div class="pull-right fnav">
+            <p>MEDICYNE CORP © 2015. ALL RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</nav>
