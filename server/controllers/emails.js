@@ -8,17 +8,18 @@ var Email = mongoose.model('Email');
 module.exports = (function(){
 	return {
 		signup: function(req, res){
+			var userInfo = req.body;
+			console.log(userInfo);
+
 			var email = new Email(req.body);
 
-			if(req.body.name == 'premium') {
+			if (!('name' in userInfo)) {
 				email.save(function(err, data){
 					if(err){
 						console.log('error adding email');
 					}else{
-						console.log('added email to database');
-						console.log('ObjectID: ' + data._id);
 						sendgrid.send({
-							to : [data.email, 'anthony@medicyne.com', 'tracy@meidcyne.com'],
+							to : [data.email, 'anthony@medicyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'Welcome to Medicyne Premium!',
 							text: 'Congratulations on choosing a better health care!',
@@ -36,10 +37,8 @@ module.exports = (function(){
 					if(err){
 						console.log('error adding email');
 					}else{
-						console.log('added email to database');
-						console.log('ObjectID: ' + data._id);
 						sendgrid.send({
-							to : [data.email, 'anthony@medicyne.com', 'tracy@medicyne.com'],
+							to : [data.email, 'anthony@medicyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'Welcome to Medicyne!',
 							text: 'Congratulations on choosing a better health care! Unfortunately, Medicyne is not servicing medication deliveries in your neighborhood just yet.  We’ll notify you as soon as we launch in your area.',

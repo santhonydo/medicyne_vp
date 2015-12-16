@@ -369,7 +369,7 @@ medicyneAppModule.controller('SignupController', function($scope, $location, med
 		if(angular.isUndefined($scope.premiumSignup.email)){
 			return;
 		}else{
-			var email = {name: 'premium', email: $scope.premiumSignup.email};
+			var email = {email: $scope.premiumSignup.email};
 			medicyneAppFactory.signup(email, function(data){
 				if(data){
 					$state.go('premiumSignupSuccess');
