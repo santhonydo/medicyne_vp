@@ -44,7 +44,7 @@ module.exports = (function(){
 				}else{
 					console.log('Successfully updated.')
 					sendgrid.send({
-							to : ['anthony@meidcyne.com', 'tracy@medicyne.com'],
+							to : ['anthony@medicyne.com'],
 							from: 'service@medicyne.com',
 							subject: 'New Order!',
 							text: 'We got a new order!',

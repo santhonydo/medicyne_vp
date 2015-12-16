@@ -129,11 +129,11 @@ medicyneAppModule.factory('medicyneAppFactory', function($http){
 	};
 
 	factory.premiumAlert = function(info, callback){
-		var email = {email: info.email};
-		$http.post('/premiumAlert', email).success(function(success){
+		$http.post('/premiumAlert', info).success(function(success){
 			callback(success);
 		})
 	};
+
 	return factory;
 });
 
