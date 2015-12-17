@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse" uib-collapse="!navbarCollapsed">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ng-click="scrollTo('how')" style="cursor: pointer;" class="page-scroll">How it works</a></li>
-                    <li><a ng-click="scrollTo('clinical')" style="cursor: pointer;" class="page-scroll">Clinical Services</a></li>
+                    <li><a ui-sref="premium" style="cursor: pointer;" class="page-scroll">Clinical Services</a></li>
                     <li><a ng-click="scrollTo('us')" style="cursor: pointer;" class="page-scroll">Team</a></li>
                     <li><a ui-sref="faq" style="cursor: pointer;" class="page-scroll">FAQ</a></li>
                     <li><a ui-sref="order" style="cursor: pointer;" class="page-scroll">Order</a></li>
@@ -31,7 +31,7 @@
         <div class="overlay">
             <div class="content">
                 <h1><strong><span class="color">Medicyne</span></strong> | Virtual Pharmacy</h1>
-                <p class="lead">Prescription On-Demand with <strong><span class="color">free delivery.</span></strong></p>
+                <p class="lead">On-Demand <strong><span class="color">Prescription Delivery.</span></strong></p>
                 <div class="row">
                     <div class="col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4 top-buffer">
                         <input type="text" name="medication" class="form-control" placeholder="Enter your medication" style="opacity: 0.8; color: #18A69C; border-radius: 5px; text-align: center; font-size: 15px; height: 35px" ng-model="newOrder.prescriptionsInfo" >
@@ -49,43 +49,16 @@
                     <div class="col-md-4"><img src="./static/img/targetlogo.png"></div>
                     <div class="col-md-3"><img src="./static/img/cvslogo.png"> </div>
                 </div>
-                <a ng-click="scrollTo('services')" style="cursor: pointer" class="fa fa-angle-down page-scroll"></a> 
+                <a ng-click="scrollTo('how')" style="cursor: pointer" class="fa fa-angle-down page-scroll"></a> 
             </div>
         </div>
     </div>
-   
 
     <!-- About Us Page
     ==========================================-->
-<div id="services" class="tf-about">
-    <div class="container">
-        <div class="section-title center text-center">
-            <h2>Order your rx now & receive it today!</h2>
-            <div class="line">
-                <hr>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-xs-offset-2 col-xs-8 col-sm-offset-1 col-sm-4 col-md-offset-1 col-md-4">
-                <h1><i class="fa fa-bolt color"></i> Fast</h1>
-                <p>You're busy, so skip the pharmacy line. We'll deliver your medications to your home or office today.</p>
-            </div>
-            <div class="col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-4 col-md-offset-2 col-md-4">
-                <h1><i class="fa fa-tag color"></i> Free</h1>
-                <p>Delivery is provided free of charge. Your only cost is the medication.</p>
-            </div>
-        </div>
-        <div class="row text-center top-buffer">
-            <p><em>Our delivery services are currently only available in the San Francisco Bay Area.<a style="cursor: pointer" ui-sref="signup"> Sign up</a> to be notified when we come to your area!</em></p>
-        </div>
-    </div>
-</div>
-
-<!-- Delivery Page
-    ==========================================-->
-<div id="how" class="tf-clients text-center">
-    <div class="overlay" id="tf-services">
-        <div class="container ">
+<div id="how" class=" text-center">
+    <div id="tf-services">
+        <div class="container">
             <div class="section-title center text-center">
                 <h2>How it works</h2>
                 <div class="line">
@@ -96,22 +69,22 @@
                 <div class="col-md-4 col-sm-4">
                     <i class="fa fa-laptop color"></i>
                     <h4><strong>Order</strong></h4>
-                    <p>Fill out the secure online form with your prescription(s), insurance, and contact information.</p>
+                    <p class="text-center">Fill out the secure online form with your prescription(s), insurance, and contact information.</p>
                 </div>
                 <div class="bottom-buffer"></div>
                 <div class="col-md-4 col-sm-4">
                     <i class="fa fa-credit-card color"></i>
                     <h4><strong>Confirmation</strong></h4>
-                    <p>Our local pharmacy partner will call you within 1 hour to confirm the cost of your medication and collect payment by phone. No delivery cost. No hidden fees.</p>
+                    <p class="text-center">Our local pharmacy partner will call you within 1 hour to confirm the cost of your medication and collect payment by phone. Non-rushed delivery (3-5 days) is FREE; same-day delivery fee is $10. No hidden fees.</p>
                 </div>
                 <div class="bottom-buffer"></div>
                 <div class="col-md-4 col-sm-4">
                     <i class="fa fa-car color"></i>
                     <h4><strong>Done</strong></h4>
-                    <p>Your medications are arriving!</p>
+                    <p style="text-align: center">Your medications are arriving!</p>
                 </div>
             </div>
-            <p class="top-buffer"><em><a style="cursor: pointer" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#18A69C'" ui-sref="faq">See answers to common questions.</a></em></p>
+            <p class="top-buffer"><em><a style="cursor: pointer" class="color" ui-sref="faq">See answers to common questions.</a></em></p>
              <div class="row">
                     <div class="col-xs-offset-3 col-xs-6 col-sm-offset-4 col-sm-4 col-md-offset-4 col-md-4 top-buffer">
                         <input type="text" name="medication" class="form-control" placeholder="Enter your medication" style="opacity: 0.8; color: #18A69C; border-radius: 5px; text-align: center; font-size: 15px; height: 35px" ng-model="newOrder.prescriptionsInfo" >
@@ -119,139 +92,141 @@
             </div>
             <div>   
                 <div class="text-center top-buffer">
-                    <button  class="btn btn-default join-button"><a style="color: white" ng-click="goOrder()" class="page-scroll">Fill Now!</a></button>
+                    <button class="btn" style="background-color: #18A69C"><a style="color: white" ng-click="goOrder()" class="page-scroll">Fill Now!</a></button>
                 </div>
             </div>
+        </div>
+        <div class="row text-center top-buffer">
+            <p><em>Our delivery services are currently only available in the San Francisco Bay Area.</em>
+            <p>Not a San Francisco resident?<a style="cursor: pointer" ui-sref="signup"> Sign up</a> to be notified when we come to your area!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Delivery Page
+    ==========================================-->
+<div class="tf-clients text-center">
+    <div class="overlay">
+        <div class="container">
+            <!-- <div class="text-center">
+                <i class="fa fa-comments-o fa-5x color"></i>
+            </div> -->
+            <div class="section-title center text-center">
+                <h2>Have <strong><span class="color">questions</span></strong> about your medications?</h2>
+                <div class="line">
+                    <hr>
+                </div>
+            </div>
+            
+            <div class="about-text text-center col-md-offset-1 col-md-10">
+                <p class="intro">With Medicyne Virtual Pharmacy, you have a clinical team available 7 days to help you understand your medications, their purpose, and potential side effects.</p>
+                <p class="intro">Day or night, our pharmacists are just a text or phone call away.</p>
+            </div>        
         </div>
     </div>
 </div>
 
 <div id="about" class="tf-about">
     <div class="container">
-        <div class="section-title center text-center">
-            <h2>Have questions about your medications?</h2>
+        <div class="section-title text-center center">
+            <h2>Join <strong><em>Medicyne Premium </em></strong>for continuous care</h2>
             <div class="line">
                 <hr>
             </div>
         </div>
-        <div class="text-center">
-            <i class="fa fa-comments-o fa-5x color"></i>
+        <div class="row">
+            <div class="top-buffer col-md-offset-2 col-md-8">
+                <div class="about-text">
+                    <p class="lead"> <i class="fa fa-dot-circle-o fa-1x color"></i>  Are you managing multiple medications?</p>
+                    <p class="lead"> <i class="fa fa-dot-circle-o fa-1x color"></i>  Are you concerned about your treatment plan?</p>
+                    <p class="lead"> <i class="fa fa-dot-circle-o fa-1x color"></i>  Are you having trouble reaching your treatment goals?</p>
+                    <p class="lead"></i>  Professional guidance to monitor your health shouldn't end once you leave the doctor's office.</p>
+                    <p class="lead">When you join Medicyne Premium, we assign you a personal pharmacist, who stays on top of your treatment to ensure you reach your health goals.</p>
+                </div>
+            </div>
         </div>
-        <div class="about-text text-center col-md-offset-2 col-md-8">
-            <p class="intro">With Medicyne Virtual Pharmacy, you have a clinical team available 7 days to help you understand your medications, their purpose, and potential side effects.</p>
-            <p class="intro">Day or night, our pharmacists are just a text or phone call away.</p>
-        </div>        
+         <div class="section-title text-center center">
+            <h4><strong>Personalized clinical services conducted via phone or video call.</strong></h4>
+            <p class="lead color">No driving. No hassle.</p>
+
+            <a ui-sref="premium" style="cursor: pointer" class="fa fa-info-circle fa-1x"><em>Learn More</em></a> 
+        </div>
     </div>
+    
 </div>
 
     <!-- Clinical Care Section
     ==========================================-->
 
-<div id="clinical" class="page-bg tf-team" >
-    <div class="overlay">
-        <div class="container">
-            <div class="section-title text-center center">
-                <h2>Join <strong><em>Medicyne Premium </em></strong>for continuous care</h2>
+<div id="us" class="page-bg tf-team text-center">
+    <div class="overlay ">
+        <div class="container ">
+            <div class="section-title center text-center">
+                <h2>Meet the <strong>Team</strong></h2>
                 <div class="line">
                     <hr>
                 </div>
+                <div class="clearfix"></div>
+                <div class="col-md-offset-1 col-md-10">
+                    <p class="intro"><em>We are a team of pharmacists and innovators looking to move healthcare forward, one patient at a time.  With our years of experience in patient care, we are here to help you live a more productive and healthier life.</em></p>
+                </div>
             </div>
             <div class="row">
-                <div class="top-buffer col-md-offset-2 col-md-8">
-                    <div class="about-text">
-                        <p class="lead"> <i class="fa fa-dot-circle-o fa-1x color"></i>  Are you managing multiple medications?</p>
-                        <p class="lead"> <i class="fa fa-dot-circle-o fa-1x color"></i>  Are you concerned about your treatment plan?</p>
-                        <p class="lead"> <i class="fa fa-dot-circle-o fa-1x color"></i>  Are you having trouble reaching your treatment goals?</p>
-                        <p class="lead"></i>  Professional guidance to monitor your health shouldn't end once you leave the doctor's office.</p>
-                        <p class="lead">When you join Medicyne Premium, we assign you a personal pharmacist, who stays on top of your treatment to ensure you reach your health goals.</p>
+                <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
+                    <img src="./static/img/team/anthony.png" alt="..." class="img-circle team-img">
+                    <div class="caption">
+                        <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Anthony Do, PharmD</p>
+                        <p class="uppercase" style="font-size: 18px;">Co-Founder | Pharmacist</p>
+                    </div>
+                    <div class="top-buffer">
+                        <a href="mailto:anthony@medicyne.com"><i class="fa fa-envelope-o fa-2x" style="margin-right: 20px; font-size: 20px"></i></a>
+                        <a href="https://www.linkedin.com/in/doanthony"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
+                    </div>
+                </div>  
+                <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
+                    <img src="./static/img/team/melody.png" alt="..." class="img-circle team-img">
+                    <div class="caption">
+                        <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Melody Tran, PharmD</p>
+                        <p style="font-size: 18px" class="uppercase">Clinical Pharmacist</p>
+                    </div>
+                    <div class="top-buffer">
+                        <a href="mailto:melodytran@gmail.com"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
+                        <a href="https://www.linkedin.com/in/melody-tran-pharmd-11638058"><i class="fa fa-linkedin fa-2x" style="font-size: 20px"></i></a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3  top-buffer">
+                    <img src="./static/img/team/tracy.png" alt="..." class="img-circle team-img">
+                    <div class="caption">
+                        <p class="uppercase color top-buffer" style="margin-bottom: 0px">Tracy Pan</p>
+                        <p style="font-size: 18px" class="uppercase">Co-Founder | Marketing</p>
+                    </div>
+                    <div class="top-buffer">
+                        <a href="mailto:tracy@medicyne.com"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
+                        <a href="https://www.linkedin.com/in/tracydpan"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
+                    <img src="./static/img/team/jesse.png" alt="..." class="img-circle team-img">
+                    <div class="caption">
+                        <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Jesse Martinez, PharmD</p>
+                        <p style="font-size: 18px" class="uppercase">Team Advisor</p>
+                    </div>
+                    <div class="top-buffer">
+                        <a href="mailto:jmartinez@westernu.edu"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
+                        <a href="https://www.linkedin.com/in/jesse-martinez-pharmd-fascp-1b701212"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
                     </div>
                 </div>
             </div>
-             <div class="section-title text-center center">
-                <h4><strong>Personalized clinical services conducted via phone or video call.</strong></h4>
-                <p class="lead color">No driving. No hassle.</p>
-
-                <a ui-sref="premium" style="cursor: pointer" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#18A69C'" class="fa fa-info-circle fa-1x"><em>Learn More</em></a> 
-            </div>
-        </div>
-        
+        </div> 
     </div>
 </div>
     
     <!-- Team page
     ==========================================-->
 
-<div id="us" class="text-center">
-
-    <div class="container">
-            <div class="space"></div>
-        <div class="section-title center">
-            <h2>Meet the <strong>Team</strong></h2>
-            <div class="line">
-                <hr>
-            </div>
-            <div class="clearfix"></div>
-                <div class="col-md-offset-1 col-md-10">
-                    <p class="intro"><em>We are a team of pharmacists and innovators looking to move healthcare forward, one patient at a time.  With our years of experience in patient care, we are here to help you live a more productive and healthier life.</em></p>
-                </div>
-        </div>
-        <!-- <div class="space"></div> -->
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
-                <img src="./static/img/team/anthony.png" alt="..." class="img-circle team-img">
-                <div class="caption">
-                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Anthony Do, PharmD</p>
-                    <p class="uppercase" style="font-size: 18px;">Co-Founder | Pharmacist</p>
-                </div>
-                <div class="top-buffer">
-                    <a href="mailto:anthony@medicyne.com"><i class="fa fa-envelope-o fa-2x" style="margin-right: 20px; font-size: 20px"></i></a>
-                    <a href="https://www.linkedin.com/in/doanthony"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
-                </div>
-            </div>  
-            <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
-                <img src="./static/img/team/melody.png" alt="..." class="img-circle team-img">
-                <div class="caption">
-                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Melody Tran, PharmD</p>
-                    <p style="font-size: 18px" class="uppercase">Clinical Pharmacist</p>
-                </div>
-                <div class="top-buffer">
-                    <a href="mailto:melodytran@gmail.com"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
-                    <a href="https://www.linkedin.com/in/melody-tran-pharmd-11638058"><i class="fa fa-linkedin fa-2x" style="font-size: 20px"></i></a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-3  top-buffer">
-                <img src="./static/img/team/tracy.png" alt="..." class="img-circle team-img">
-                <div class="caption">
-                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Tracy Pan</p>
-                    <p style="font-size: 18px" class="uppercase">Co-Founder | Marketing</p>
-                </div>
-                <div class="top-buffer">
-                    <a href="mailto:tracy@medicyne.com"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
-                    <a href="https://www.linkedin.com/in/tracydpan"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-3 top-buffer">
-                <img src="./static/img/team/jesse.png" alt="..." class="img-circle team-img">
-                <div class="caption">
-                    <p class="uppercase color top-buffer" style="margin-bottom: 0px">Dr. Jesse Martinez, PharmD</p>
-                    <p style="font-size: 18px" class="uppercase">Team Advisor</p>
-                </div>
-                <div class="top-buffer">
-                    <a href="mailto:jmartinez@westernu.edu"><i class="fa fa-envelope-o" style="margin-right: 20px; font-size: 20px"></i></a>
-                    <a href="https://www.linkedin.com/in/jesse-martinez-pharmd-fascp-1b701212"><i class="fa fa-linkedin" style="font-size: 20px"></i></a>
-                </div>
-            </div>
-        </div>
-
-    </div>
+<div class="text-center">
     <div class="space"></div>
-</div>    
-
-<!-- Testimonials Section
-==========================================-->
-<div id="tf-testimonials" class="text-center">
-    <div class="overlay">
-        <div class="container">
+    <div class="container">
             <div class="section-title center">
                 <h2>Your health. <strong>You're in control.</strong></h2>
                 <div class="line">
@@ -268,13 +243,21 @@
             </div>
             <div class="col-md-offset-4 col-md-4 col-sm-offset-4 col-sm-4 col-xs-offset-3 col-xs-6">
                 <form class="form-inline" role="form">
-                    <button style="margin-top: 10px" class="btn btn-default join-button"><a style="color: white" ui-sref="order" class="page-scroll">Fill Now!</button>
+                    <button style="margin-top: 10px; background-color: #18A69C" class="btn"><a style="color: white" ui-sref="order" class="page-scroll">Fill Now!</a></button>
                 </form>
             </div>
         </div>
-    </div> 
-</div>
+    <div class="space"></div>
+</div>    
 
+<!-- <!-- Testimonials Section
+==========================================-->
+<!-- <div id="tf-testimonials" class="text-center">
+    <div class="overlay">
+        
+    </div> 
+</div> -->
+ -->
 <nav id="footer">
     <div class="container">
         <div class="pull-right fnav">
