@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var stripe = require("stripe")("sk_live_DW1I6W9YtmtT2mPNRAWHiwBJ"); 
-var sendgrid = require('sendgrid')('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');
+var sendgrid = require('sendgrid')('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');
 
 var Transfer = mongoose.model('Transfer');
 
