@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-var stripe = require("stripe")("sk_test_Wf8ZUqakNp9NOqETeWuE5AFU"); 
-var sendgrid = require('sendgrid')('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');
+
 var mongoose = require('mongoose');
 
 var Email = mongoose.model('Email');
